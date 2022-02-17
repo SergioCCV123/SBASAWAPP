@@ -1,0 +1,226 @@
+﻿@using SBASAWAPP.Models
+@model MainViewModel
+@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/MainStyles.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <a href="@Url.Action("Index", "Admin")">
+        <div class="row">
+            <div class="col-12 bg-dark text-center text-white p-2">
+                Administrador
+            </div>
+        </div>
+    </a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-4" style="padding-left:1em; padding-right:1em; font-size:1.2em; padding-top:0;">
+        <div class="container-fluid">
+            <a href="@Url.Action("Index", "Home")" class="navbar-brand  navTitles" style="font-size: 1.3em">
+                <img src="~/Img/LOGOARCOR.jpg" alt="Company Logo" width="54" height="45" />
+                Sistemas de Bombeo Arcor S.A
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle Navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item active p-1">
+                        <a href="@Url.Action("Index", "Home")" class="nav-link navTitles">Inicio</a>
+                    </li>
+                    <li class="nav-item active p-1">
+                        <a href="@Url.Action("Index", "Home")#Servicios" class="nav-link navTitles">Servicios</a>
+                    </li>
+                    <li class="nav-item active p-1">
+                        <a href="@Url.Action("Index", "Home")#Productos" class="nav-link navTitles">Productos</a>
+                    </li>
+                    <li class="nav-item active p-1">
+                        <a href="@Url.Action("Index", "Quotes")" class="nav-link navTitles">Cotizar</a>
+                    </li>
+                    <li class="nav-item active p-1">
+                        <a href="@Url.Action("Index", "Home")#Contacto" class="nav-link navTitles">Contacto</a>
+                    </li>
+                    <li class="nav-item active p-1">
+                        <a href="@Url.Action("Cart", "Home")" class="nav-link navTitles"><i class="fas fa-shopping-cart" style="color: #094067; "></i></a>
+                    </li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            
+                                <li>
+                                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                </li>
+                                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                            
+                        }
+                    }
+                    <li class="nav-item active p-1">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#LoginWindow">
+                            Login
+                        </button>
+                    </li>
+                    <li class="nav-item active p-1">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SignUpWindow">
+                            Sign Up
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="modal fade" id="SignUpWindow" tabindex="-1" aria-labelledby="SignUpWindowLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container text-center navTitles">
+                        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <h5 class="p-1">
+                                Crear Cuenta
+                            </h5>
+                            @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                            <div class="mb-3 form-group">
+                                @Html.LabelFor(m => Model.Model1.Email, new { @class = "form-label" })
+                                @Html.TextBoxFor(m => Model.Model1.Email, new { @class = "form-control" })
+                                <div id="emailHelp" class="form-text">Este correo Electronico nunca sera compartido</div>
+                            </div>
+                            <div class="mb-3 form-group">
+                                @Html.LabelFor(m => Model.Model1.Password, new { @class = "form-label" })
+                                @Html.PasswordFor(m => Model.Model1.Password, new { @class = "form-control" })
+                            </div>
+                            <div class="mb-3 form-group">
+                                @Html.LabelFor(m => Model.Model1.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                                @Html.PasswordFor(m => Model.Model1.ConfirmPassword, new { @class = "form-control" })
+                            </div>
+
+                            <div class="row p-1">
+                                <div class="btn-group" role="group" aria-label="Button Group">
+                                    <button type="button" class="btn btn-outline-dark p-1">
+                                        <i class="fab fa-google"></i>
+                                        <p>
+                                            Crear Cuenta de Google
+                                        </p>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-dark p-1">
+                                        <i class="fab fa-facebook-f"></i>
+                                        <p>
+                                            Crear Cuenta de Facebook
+                                        </p>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="modal-footer form-group">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="Register" />
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="LoginWindow" tabindex="-1" aria-labelledby="LoginWindowLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container text-center navTitles">
+                        <section id="loginForm">
+                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <h5 class="p-1">
+                                    Iniciar Sesion
+                                </h5>
+                                <hr />
+                                <div class="mb-3 form-group">
+                                    @Html.LabelFor(m => Model.Model2.Email, new { @class = "form-label" })
+                                    @Html.TextBoxFor(m => Model.Model2.Email, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => Model.Model2.Email, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="mb-3 form-group">
+                                    @Html.LabelFor(m => Model.Model2.Password, new { @class = "form-label" })
+                                    @Html.PasswordFor(m => Model.Model2.Password, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => Model.Model2.Password, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="mb-3 form-group">
+                                    <div class="checkbox">
+                                        @Html.CheckBoxFor(m => Model.Model2.RememberMe)
+                                        @Html.LabelFor(m => Model.Model2.RememberMe)
+                                    </div>
+                                </div>
+
+                                <h5 class="p-1">
+                                    -O-
+                                </h5>
+                                <div class="row p-1">
+                                    <div class="btn-group" role="group" aria-label="Button Group">
+                                        <button type="button" class="btn btn-outline-dark p-1">
+                                            <i class="fab fa-google"></i>
+                                            <p>
+                                                Iniciar Sesion con Google
+                                            </p>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-dark p-1">
+                                            <i class="fab fa-facebook-f"></i>
+                                            <p>
+                                                Iniciar Sesion con Facebook
+                                            </p>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="modal-footer form-group">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    <input type="submit" value="Log in" class="btn btn-primary" />
+                                </div>
+                            }
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center justify-content-center">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @RenderBody()
+    </div>
+    <footer>
+        <img src="~/Img/footer.png" alt="waves" class="img-fluid" style="width:100%" />
+        <section class="d-flex justify-content-between p-4" style="background-color:#094067;">
+            <div class="me-5" style="color:white">
+                <span>© 2020 Sistemas de Bombeo Arcor</span>
+            </div>
+            <div>
+                <a href="" class="text-white me-4">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </div>
+        </section>
+    </footer>
+    <script>
+        $("#navbarSupportedContent a:not(.dropdown-toggle)").click(function () {
+            $("#navbarSupportedContent").collapse("hide");
+        });
+    </script>
+</body>
+
+</html>
