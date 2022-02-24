@@ -32,5 +32,7 @@ namespace SBASAWAPP
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<PRODUCT> PRODUCTS { get; set; }
         public virtual DbSet<CATEGORIES> CATEGORIES { get; set; }
+        public virtual DbSet<SALES> SALES { get; set; }
+        public virtual DbSet<PRODUCTSPS> PRODUCTSPS { get; set; }
     }
 }

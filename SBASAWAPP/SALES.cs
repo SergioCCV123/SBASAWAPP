@@ -12,22 +12,18 @@ namespace SBASAWAPP
     using System;
     using System.Collections.Generic;
     
-    public partial class PRODUCT
+    public partial class SALES
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PRODUCT()
+        public SALES()
         {
             this.PRODUCTSPS = new HashSet<PRODUCTSPS>();
         }
     
         public int ID { get; set; }
-        public string NAME { get; set; }
-        public string DESCRIPTION { get; set; }
-        public decimal PRICE { get; set; }
-        public string URL { get; set; }
-        public Nullable<int> CATEGORY { get; set; }
+        public string CLIENT_NAME { get; set; }
+        public decimal SALE_TOTAL { get; set; }
     
-        public virtual CATEGORIES CATEGORIES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCTSPS> PRODUCTSPS { get; set; }
     }

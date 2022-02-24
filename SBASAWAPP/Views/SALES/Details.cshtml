@@ -1,0 +1,35 @@
+﻿@model SBASAWAPP.SALES
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SALES</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CLIENT_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CLIENT_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SALE_TOTAL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SALE_TOTAL)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
