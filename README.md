@@ -1,29 +1,30 @@
-# README #
+# Proyecto Analisis
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Este es el repositorio para el proyecto de los cursos de Analisis de la universidad Fidelitas
 
-### What is this repository for? ###
+## Integrantes
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+Sergio Calderon Corderos
+Luis Guzman Perez
+Eddy Villalobos Chaves
+Kendall Fernandez Fernandez
 
-### How do I get set up? ###
+## Nuestro proyecto
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+Este proyecto se enfoca en traer a la empresa Sistemas de Bombeo ARCOR al siglo 21 y con esto implementar soluciones para tener un mejor manejo de los datos en la misma.
 
-### Contribution guidelines ###
+## Instrucciones de Instalacion
 
-* Writing tests
-* Code review
-* Other guidelines
+Primero se debera clonar el respositorio en la maquina por lo que deberan de correr el siguiente comando: 
 
-### Who do I talk to? ###
+```Bash
+git clone git@bitbucket.org:analisis-fidelitas/sbawapp.git
+```
 
-* Repo owner or admin
-* Other community or team contact
+En caso de que el sistema pida una llave SSH debera correr el siguiente comando:
+
+```Bash
+ssh-keygen -b 2048 -t rsa
+```
+
+Una vez hecho esto debera enviar un correo a scalderon40839@ufide.ac.cr con la llave con terminacion .pub, una vez confirmado el acceso, vuelva a correr el comando del primer paso y el repositorio sera clonado
