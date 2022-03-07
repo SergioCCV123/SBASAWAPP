@@ -73,6 +73,18 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CATEGORY_NAME" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="FACTURA">
+          <Key>
+            <PropertyRef Name="IDFACTURA" />
+          </Key>
+          <Property Name="IDFACTURA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDUSUARIO" Type="nvarchar" MaxLength="128" />
+          <Property Name="FECHA" Type="datetime" Nullable="false" />
+          <Property Name="IVA" Type="real" Nullable="false" />
+          <Property Name="TOTAL" Type="real" Nullable="false" />
+          <Property Name="NUMPAGO" Type="int" Nullable="false" />
+          <Property Name="DESCUENTO" Type="money" />
+        </EntityType>
         <EntityType Name="PRODUCTS">
           <Key>
             <PropertyRef Name="ID" />
@@ -83,6 +95,7 @@
           <Property Name="PRICE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="URL" Type="text" />
           <Property Name="CATEGORY" Type="int" />
+          <Property Name="ACTIVE" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'example5_SBASAWAPP.dbo.PRODUCTSPS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -104,6 +117,18 @@ warning 6002: The table/view 'example5_SBASAWAPP.dbo.PRODUCTSPS' does not have a
           <Property Name="CLIENT_NAME" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="SALE_TOTAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
+        <Association Name="FK__FACTURA__IDUSUAR__5EBF139D">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="FACTURA" Type="Self.FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__PRODUCTS__CATEGO__4AB81AF0">
           <End Role="CATEGORIES" Type="Self.CATEGORIES" Multiplicity="0..1" />
           <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="*" />
@@ -204,6 +229,7 @@ warning 6002: The table/view 'example5_SBASAWAPP.dbo.PRODUCTSPS' does not have a
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CATEGORIES" EntityType="Self.CATEGORIES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FACTURA" EntityType="Self.FACTURA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCTS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SALES" EntityType="Self.SALES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUCTSPS" EntityType="Self.PRODUCTSPS" store:Type="Tables" store:Schema="dbo">
@@ -213,6 +239,10 @@ warning 6002: The table/view 'example5_SBASAWAPP.dbo.PRODUCTSPS' does not have a
     [PRODUCTSPS].[QUANTITY] AS [QUANTITY]
     FROM [dbo].[PRODUCTSPS] AS [PRODUCTSPS]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK__FACTURA__IDUSUAR__5EBF139D" Association="Self.FK__FACTURA__IDUSUAR__5EBF139D">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
           <AssociationSet Name="FK__PRODUCTS__CATEGO__4AB81AF0" Association="Self.FK__PRODUCTS__CATEGO__4AB81AF0">
             <End Role="CATEGORIES" EntitySet="CATEGORIES" />
             <End Role="PRODUCTS" EntitySet="PRODUCTS" />
@@ -280,6 +310,11 @@ warning 6002: The table/view 'example5_SBASAWAPP.dbo.PRODUCTSPS' does not have a
             <End Role="SALES" EntitySet="SALES" />
             <End Role="PRODUCTSPS" EntitySet="PRODUCTSPS" />
           </AssociationSet>
+          <EntitySet Name="FACTURA" EntityType="example5_SBASAWAPPModel.FACTURA" />
+          <AssociationSet Name="FK__FACTURA__IDUSUAR__5EBF139D" Association="example5_SBASAWAPPModel.FK__FACTURA__IDUSUAR__5EBF139D">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -339,6 +374,7 @@ warning 6002: The table/view 'example5_SBASAWAPP.dbo.PRODUCTSPS' does not have a
           <NavigationProperty Name="AspNetUserClaims" Relationship="example5_SBASAWAPPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="example5_SBASAWAPPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="AspNetRoles" Relationship="example5_SBASAWAPPModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+          <NavigationProperty Name="FACTURA" Relationship="example5_SBASAWAPPModel.FK__FACTURA__IDUSUAR__5EBF139D" FromRole="AspNetUser" ToRole="FACTURA" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="example5_SBASAWAPPModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
@@ -384,6 +420,7 @@ warning 6002: The table/view 'example5_SBASAWAPP.dbo.PRODUCTSPS' does not have a
           <Property Name="CATEGORY" Type="Int32" />
           <NavigationProperty Name="CATEGORIES" Relationship="example5_SBASAWAPPModel.FK__PRODUCTS__CATEGO__4AB81AF0" FromRole="PRODUCT" ToRole="CATEGORIES" />
           <NavigationProperty Name="PRODUCTSPS" Relationship="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_PR__5BE2A6F2" FromRole="PRODUCT" ToRole="PRODUCTSPS" />
+          <Property Name="ACTIVE" Type="Boolean" />
         </EntityType>
         <EntityType Name="CATEGORIES">
           <Key>
@@ -447,6 +484,31 @@ warning 6002: The table/view 'example5_SBASAWAPP.dbo.PRODUCTSPS' does not have a
             </Principal>
             <Dependent Role="PRODUCTSPS">
               <PropertyRef Name="ID_SALE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FACTURA">
+          <Key>
+            <PropertyRef Name="IDFACTURA" />
+          </Key>
+          <Property Name="IDFACTURA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDUSUARIO" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IVA" Type="Single" Nullable="false" />
+          <Property Name="TOTAL" Type="Single" Nullable="false" />
+          <Property Name="NUMPAGO" Type="Int32" Nullable="false" />
+          <Property Name="DESCUENTO" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="AspNetUsers" Relationship="example5_SBASAWAPPModel.FK__FACTURA__IDUSUAR__5EBF139D" FromRole="FACTURA" ToRole="AspNetUser" />
+        </EntityType>
+        <Association Name="FK__FACTURA__IDUSUAR__5EBF139D">
+          <End Type="example5_SBASAWAPPModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="example5_SBASAWAPPModel.FACTURA" Role="FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="IDUSUARIO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -522,6 +584,7 @@ warning 6002: The table/view 'example5_SBASAWAPP.dbo.PRODUCTSPS' does not have a
           <EntitySetMapping Name="PRODUCTS">
             <EntityTypeMapping TypeName="example5_SBASAWAPPModel.PRODUCT">
               <MappingFragment StoreEntitySet="PRODUCTS">
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
                 <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
                 <ScalarProperty Name="URL" ColumnName="URL" />
                 <ScalarProperty Name="PRICE" ColumnName="PRICE" />
@@ -554,6 +617,19 @@ warning 6002: The table/view 'example5_SBASAWAPP.dbo.PRODUCTSPS' does not have a
                 <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
                 <ScalarProperty Name="ID_PRODUCT" ColumnName="ID_PRODUCT" />
                 <ScalarProperty Name="ID_SALE" ColumnName="ID_SALE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACTURA">
+            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.FACTURA">
+              <MappingFragment StoreEntitySet="FACTURA">
+                <ScalarProperty Name="DESCUENTO" ColumnName="DESCUENTO" />
+                <ScalarProperty Name="NUMPAGO" ColumnName="NUMPAGO" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+                <ScalarProperty Name="IDFACTURA" ColumnName="IDFACTURA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
