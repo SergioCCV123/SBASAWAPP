@@ -73,6 +73,26 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CATEGORY_NAME" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="FACTURA">
+          <Key>
+            <PropertyRef Name="IDFACTURA" />
+          </Key>
+          <Property Name="IDFACTURA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDUSUARIO" Type="nvarchar" MaxLength="128" />
+          <Property Name="FECHA" Type="datetime" Nullable="false" />
+          <Property Name="IVA" Type="real" Nullable="false" />
+          <Property Name="TOTAL" Type="real" Nullable="false" />
+          <Property Name="NUMPAGO" Type="int" Nullable="false" />
+          <Property Name="DESCUENTO" Type="money" />
+        </EntityType>
+        <EntityType Name="INSTALADOR">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="60" />
+          <Property Name="FechaRegistro" Type="datetime" />
+        </EntityType>
         <EntityType Name="PRODUCTS">
           <Key>
             <PropertyRef Name="ID" />
@@ -83,6 +103,27 @@
           <Property Name="PRICE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="URL" Type="text" />
           <Property Name="CATEGORY" Type="int" />
+          <Property Name="ACTIVE" Type="bit" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="PRODUCTSPS">
+          <Key>
+            <PropertyRef Name="ID_SALE" />
+            <PropertyRef Name="ID_PRODUCT" />
+            <PropertyRef Name="QUANTITY" />
+          </Key>
+          <Property Name="ID_SALE" Type="int" Nullable="false" />
+          <Property Name="ID_PRODUCT" Type="int" Nullable="false" />
+          <Property Name="QUANTITY" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SALES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CLIENT_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SALE_TOTAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <Association Name="FK__PRODUCTS__CATEGO__4AB81AF0">
           <End Role="CATEGORIES" Type="Self.CATEGORIES" Multiplicity="0..1" />
@@ -93,6 +134,30 @@
             </Principal>
             <Dependent Role="PRODUCTS">
               <PropertyRef Name="CATEGORY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTSP__ID_PR__5BE2A6F2">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1" />
+          <End Role="PRODUCTSPS" Type="Self.PRODUCTSPS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTSPS">
+              <PropertyRef Name="ID_PRODUCT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTSP__ID_SA__5AEE82B9">
+          <End Role="SALES" Type="Self.SALES" Multiplicity="1" />
+          <End Role="PRODUCTSPS" Type="Self.PRODUCTSPS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SALES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTSPS">
+              <PropertyRef Name="ID_SALE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -160,10 +225,28 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CATEGORIES" EntityType="Self.CATEGORIES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FACTURA" EntityType="Self.FACTURA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INSTALADOR" EntityType="Self.INSTALADOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SALES" EntityType="Self.SALES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTSPS" EntityType="Self.PRODUCTSPS" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PRODUCTSPS].[ID_SALE] AS [ID_SALE], 
+    [PRODUCTSPS].[ID_PRODUCT] AS [ID_PRODUCT], 
+    [PRODUCTSPS].[QUANTITY] AS [QUANTITY]
+    FROM [dbo].[PRODUCTSPS] AS [PRODUCTSPS]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__PRODUCTS__CATEGO__4AB81AF0" Association="Self.FK__PRODUCTS__CATEGO__4AB81AF0">
             <End Role="CATEGORIES" EntitySet="CATEGORIES" />
             <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTSP__ID_PR__5BE2A6F2" Association="Self.FK__PRODUCTSP__ID_PR__5BE2A6F2">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="PRODUCTSPS" EntitySet="PRODUCTSPS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTSP__ID_SA__5AEE82B9" Association="Self.FK__PRODUCTSP__ID_SA__5AEE82B9">
+            <End Role="SALES" EntitySet="SALES" />
+            <End Role="PRODUCTSPS" EntitySet="PRODUCTSPS" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -210,6 +293,23 @@
             <End Role="CATEGORIES" EntitySet="CATEGORIES" />
             <End Role="PRODUCT" EntitySet="PRODUCTS" />
           </AssociationSet>
+          <EntitySet Name="SALES" EntityType="example5_SBASAWAPPModel.SALES" />
+          <EntitySet Name="PRODUCTSPS" EntityType="example5_SBASAWAPPModel.PRODUCTSPS" />
+          <AssociationSet Name="FK__PRODUCTSP__ID_PR__5BE2A6F2" Association="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_PR__5BE2A6F2">
+            <End Role="PRODUCT" EntitySet="PRODUCTS" />
+            <End Role="PRODUCTSPS" EntitySet="PRODUCTSPS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTSP__ID_SA__5AEE82B9" Association="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_SA__5AEE82B9">
+            <End Role="SALES" EntitySet="SALES" />
+            <End Role="PRODUCTSPS" EntitySet="PRODUCTSPS" />
+          </AssociationSet>
+          <EntitySet Name="INSTALADOR" EntityType="example5_SBASAWAPPModel.INSTALADOR" />
+          <EntitySet Name="FACTURA" EntityType="example5_SBASAWAPPModel.FACTURA" />
+          <AssociationSet Name="FK__FACTURA__IDUSUAR__5EBF139D" Association="example5_SBASAWAPPModel.FK__FACTURA__IDUSUAR__5EBF139D">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <EntitySet Name="INSTALADOR" EntityType="example5_SBASAWAPPModel.INSTALADOR" />
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -313,6 +413,8 @@
           <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CATEGORY" Type="Int32" />
           <NavigationProperty Name="CATEGORIES" Relationship="example5_SBASAWAPPModel.FK__PRODUCTS__CATEGO__4AB81AF0" FromRole="PRODUCT" ToRole="CATEGORIES" />
+          <NavigationProperty Name="PRODUCTSPS" Relationship="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_PR__5BE2A6F2" FromRole="PRODUCT" ToRole="PRODUCTSPS" />
+          <Property Name="ACTIVE" Type="Boolean" />
         </EntityType>
         <EntityType Name="CATEGORIES">
           <Key>
@@ -334,6 +436,91 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SALES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CLIENT_NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SALE_TOTAL" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="PRODUCTSPS" Relationship="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_SA__5AEE82B9" FromRole="SALES" ToRole="PRODUCTSPS" />
+        </EntityType>
+        <EntityType Name="PRODUCTSPS">
+          <Key>
+            <PropertyRef Name="ID_SALE" />
+            <PropertyRef Name="ID_PRODUCT" />
+            <PropertyRef Name="QUANTITY" />
+          </Key>
+          <Property Name="ID_SALE" Type="Int32" Nullable="false" />
+          <Property Name="ID_PRODUCT" Type="Int32" Nullable="false" />
+          <Property Name="QUANTITY" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PRODUCTS" Relationship="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_PR__5BE2A6F2" FromRole="PRODUCTSPS" ToRole="PRODUCT" />
+          <NavigationProperty Name="SALES" Relationship="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_SA__5AEE82B9" FromRole="PRODUCTSPS" ToRole="SALES" />
+        </EntityType>
+        <Association Name="FK__PRODUCTSP__ID_PR__5BE2A6F2">
+          <End Type="example5_SBASAWAPPModel.PRODUCT" Role="PRODUCT" Multiplicity="1" />
+          <End Type="example5_SBASAWAPPModel.PRODUCTSPS" Role="PRODUCTSPS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTSPS">
+              <PropertyRef Name="ID_PRODUCT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTSP__ID_SA__5AEE82B9">
+          <End Type="example5_SBASAWAPPModel.SALES" Role="SALES" Multiplicity="1" />
+          <End Type="example5_SBASAWAPPModel.PRODUCTSPS" Role="PRODUCTSPS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SALES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTSPS">
+              <PropertyRef Name="ID_SALE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="INSTALADOR">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="FACTURA">
+          <Key>
+            <PropertyRef Name="IDFACTURA" />
+          </Key>
+          <Property Name="IDFACTURA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDUSUARIO" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IVA" Type="Single" Nullable="false" />
+          <Property Name="TOTAL" Type="Single" Nullable="false" />
+          <Property Name="NUMPAGO" Type="Int32" Nullable="false" />
+          <Property Name="DESCUENTO" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <Association Name="FK__FACTURA__IDUSUAR__5EBF139D">
+          <End Type="example5_SBASAWAPPModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="example5_SBASAWAPPModel.FACTURA" Role="FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="INSTALADOR">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -406,6 +593,7 @@
           <EntitySetMapping Name="PRODUCTS">
             <EntityTypeMapping TypeName="example5_SBASAWAPPModel.PRODUCT">
               <MappingFragment StoreEntitySet="PRODUCTS">
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
                 <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
                 <ScalarProperty Name="URL" ColumnName="URL" />
                 <ScalarProperty Name="PRICE" ColumnName="PRICE" />
@@ -420,6 +608,55 @@
               <MappingFragment StoreEntitySet="CATEGORIES">
                 <ScalarProperty Name="CATEGORY_NAME" ColumnName="CATEGORY_NAME" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SALES">
+            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.SALES">
+              <MappingFragment StoreEntitySet="SALES">
+                <ScalarProperty Name="SALE_TOTAL" ColumnName="SALE_TOTAL" />
+                <ScalarProperty Name="CLIENT_NAME" ColumnName="CLIENT_NAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTSPS">
+            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.PRODUCTSPS">
+              <MappingFragment StoreEntitySet="PRODUCTSPS">
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="ID_PRODUCT" ColumnName="ID_PRODUCT" />
+                <ScalarProperty Name="ID_SALE" ColumnName="ID_SALE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INSTALADOR">
+            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.INSTALADOR">
+              <MappingFragment StoreEntitySet="INSTALADOR">
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACTURA">
+            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.FACTURA">
+              <MappingFragment StoreEntitySet="FACTURA">
+                <ScalarProperty Name="DESCUENTO" ColumnName="DESCUENTO" />
+                <ScalarProperty Name="NUMPAGO" ColumnName="NUMPAGO" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+                <ScalarProperty Name="IDFACTURA" ColumnName="IDFACTURA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INSTALADOR">
+            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.INSTALADOR">
+              <MappingFragment StoreEntitySet="INSTALADOR">
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<SBASAWAPP.SALES>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<section id="main">
+    <div class="inner">
+
+        <section id="one" class="wrapper style1">
+            <header class="special">
+                <h2>Informacion de Ventas</h2>
+            </header>
+            <div class="content">
+                <table id="MiTabla" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CLIENT_NAME)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SALE_TOTAL)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CLIENT_NAME)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SALE_TOTAL)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </section>
+    </div>
+</section>
