@@ -10,55 +10,70 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IDUSUARIO)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FECHA)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IVA)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TOTAL)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NUMPAGO)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DESCUENTO)
-        </th>
-        <th></th>
-    </tr>
+<section id="main">
+    <div class="inner">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IDUSUARIO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FECHA)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IVA)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TOTAL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NUMPAGO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DESCUENTO)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IDFACTURA }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IDFACTURA }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IDFACTURA })
-        </td>
-    </tr>
-}
-
-</table>
+        <section id="one" class="wrapper style1">
+            <header class="special">
+                <h2>Informacion de Facturas</h2>
+            </header>
+            <div class="content">
+                <table class="table" id="MiTabla" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IDUSUARIO)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FECHA)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IVA)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TOTAL)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NUMPAGO)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DESCUENTO)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IDUSUARIO)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FECHA)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IVA)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TOTAL)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NUMPAGO)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DESCUENTO)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.IDFACTURA }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.IDFACTURA }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.IDFACTURA })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</section>
