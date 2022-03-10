@@ -26,6 +26,7 @@ namespace SBASAWAPP
         public decimal PRICE { get; set; }
         public string URL { get; set; }
         public Nullable<int> CATEGORY { get; set; }
+        public Nullable<bool> ACTIVE { get; set; }
     
         public virtual CATEGORIES CATEGORIES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
