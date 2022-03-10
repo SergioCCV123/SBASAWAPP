@@ -44,7 +44,7 @@ namespace SBASAWAPP.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDFACTURA,FECHA,IVA,TOTAL,NUMPAGO,DESCUENTO")] FACTURA fACTURA)
+        public ActionResult Create([Bind(Include = "IDFACTURA,IDUSUARIO,FECHA,IVA,TOTAL,NUMPAGO,DESCUENTO")] FACTURA fACTURA)
         {
             if (ModelState.IsValid)
             {
@@ -76,7 +76,7 @@ namespace SBASAWAPP.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDFACTURA,FECHA,IVA,TOTAL,NUMPAGO,DESCUENTO")] FACTURA fACTURA)
+        public ActionResult Edit([Bind(Include = "IDFACTURA,IDUSUARIO,FECHA,IVA,TOTAL,NUMPAGO,DESCUENTO")] FACTURA fACTURA)
         {
             if (ModelState.IsValid)
             {

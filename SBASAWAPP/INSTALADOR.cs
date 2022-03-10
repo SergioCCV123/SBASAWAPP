@@ -12,14 +12,10 @@ namespace SBASAWAPP
     using System;
     using System.Collections.Generic;
     
-    public partial class FACTURA
+    public partial class INSTALADOR
     {
-        public int IDFACTURA { get; set; }
-        public string IDUSUARIO { get; set; }
-        public System.DateTime FECHA { get; set; }
-        public float IVA { get; set; }
-        public float TOTAL { get; set; }
-        public int NUMPAGO { get; set; }
-        public Nullable<decimal> DESCUENTO { get; set; }
+        public int IdRol { get; set; }
+        public string Nombre { get; set; }
+        public Nullable<System.DateTime> FechaRegistro { get; set; }
     }
 }

@@ -200,6 +200,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="INSTALADOR.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -369,11 +372,11 @@
     <Content Include="Views\SALES\Details.cshtml" />
     <Content Include="Views\SALES\Edit.cshtml" />
     <Content Include="Views\SALES\Index.cshtml" />
-    <Content Include="Views\FACTURA\Index.cshtml" />
     <Content Include="Views\FACTURA\Create.cshtml" />
-    <Content Include="Views\FACTURA\Edit.cshtml" />
-    <Content Include="Views\FACTURA\Delete.cshtml" />
+    <Content Include="Views\FACTURA\Index.cshtml" />
     <Content Include="Views\FACTURA\Details.cshtml" />
+    <Content Include="Views\FACTURA\Delete.cshtml" />
+    <Content Include="Views\FACTURA\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
