@@ -4,10 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cd1ba7984ba34ab2bff721c72bb986d1" Name="Diagram1" ZoomLevel="53" >
+      <Diagram DiagramId="cd1ba7984ba34ab2bff721c72bb986d1" Name="Diagram1" ZoomLevel="96" >
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="6.75" />
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" />
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="3.625" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.AspNetUserClaim" Width="1.5" PointX="5.5" PointY="3.625" />
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="1" />
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" />
         <AssociationConnector Association="example5_SBASAWAPPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
@@ -23,6 +23,8 @@
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.FACTURA" Width="1.5" PointX="5.25" PointY="13.125" />
         <AssociationConnector Association="example5_SBASAWAPPModel.FK__FACTURA__IDUSUAR__5EBF139D" />
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.INSTALADOR" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.INSTALADOR" Width="1.5" PointX="8.375" PointY="2.625" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.FACTURA" Width="1.5" PointX="2" PointY="9.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

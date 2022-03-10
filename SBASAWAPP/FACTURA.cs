@@ -21,7 +21,5 @@ namespace SBASAWAPP
         public float TOTAL { get; set; }
         public int NUMPAGO { get; set; }
         public Nullable<decimal> DESCUENTO { get; set; }
-    
-        public virtual AspNetUser AspNetUsers { get; set; }
     }
 }

@@ -34,6 +34,7 @@ namespace SBASAWAPP
         public virtual DbSet<CATEGORIES> CATEGORIES { get; set; }
         public virtual DbSet<SALES> SALES { get; set; }
         public virtual DbSet<PRODUCTSPS> PRODUCTSPS { get; set; }
+        public virtual DbSet<INSTALADOR> INSTALADOR { get; set; }
         public virtual DbSet<FACTURA> FACTURA { get; set; }
         public virtual DbSet<INSTALADOR> INSTALADOR { get; set; }
     }
