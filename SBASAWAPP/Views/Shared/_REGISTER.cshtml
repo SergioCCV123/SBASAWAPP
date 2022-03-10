@@ -1,0 +1,28 @@
+﻿@using SBASAWAPP.Models
+@model SBASAWAPP.Models.RegisterViewModel
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h5 class="p-1">
+        Crear Cuenta
+    </h5>
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    <div class="mb-3 form-group">
+        @Html.LabelFor(m => Model.Email, new { @class = "form-label" })
+        @Html.TextBoxFor(m => Model.Email, new { @class = "form-control" })
+        <div id="emailHelp" class="form-text">Este correo Electronico nunca sera compartido</div>
+    </div>
+    <div class="mb-3 form-group">
+        @Html.LabelFor(m => Model.Password, new { @class = "form-label" })
+        @Html.PasswordFor(m => Model.Password, new { @class = "form-control" })
+    </div>
+    <div class="mb-3 form-group">
+        @Html.LabelFor(m => Model.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        @Html.PasswordFor(m => Model.ConfirmPassword, new { @class = "form-control" })
+    </div>
+    <div class="modal-footer form-group">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary" value="Register" />
+    </div>
+}

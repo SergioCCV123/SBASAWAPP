@@ -1,0 +1,21 @@
+﻿@using SBASAWAPP.Models
+@model SBASAWAPP.Models.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }))
+    {
+        @Html.AntiForgeryToken()
+        <div id="socialLoginList">
+                @foreach (AuthenticationDescription p in loginProviders)
+                {
+                    <button type="submit" aria-label="button group" class="btn btn-outline-dark p-1 btn-block" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType">
+                        <i class="fab fa-@p.Caption.ToLower()"></i>
+                        <p>
+                            Iniciar con @p.Caption
+                        </p>
+                    </button>
+                }
+        </div>
+    }
+}

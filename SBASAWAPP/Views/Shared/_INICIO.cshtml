@@ -1,0 +1,30 @@
+﻿@using SBASAWAPP.Models
+@model LoginViewModel
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h5 class="p-1">
+        Iniciar Sesion
+    </h5>
+    <hr />
+    <div class="mb-3 form-group">
+        @Html.LabelFor(m => Model.Email, new { @class = "form-label" })
+        @Html.TextBoxFor(m => Model.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => Model.Email, "", new { @class = "text-danger" })
+    </div>
+    <div class="mb-3 form-group">
+        @Html.LabelFor(m => Model.Password, new { @class = "form-label" })
+        @Html.PasswordFor(m => Model.Password, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => Model.Password, "", new { @class = "text-danger" })
+    </div>
+    <div class="mb-3 form-group">
+        <div class="checkbox">
+            @Html.CheckBoxFor(m => Model.RememberMe)
+            @Html.LabelFor(m => Model.RememberMe)
+        </div>
+    </div>
+    <div class="modal-footer form-group">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <input type="submit" value="Log in" class="btn btn-primary" />
+    </div>
+}

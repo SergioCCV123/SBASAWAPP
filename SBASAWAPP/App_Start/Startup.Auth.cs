@@ -54,15 +54,16 @@ namespace SBASAWAPP
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "717220792987845",
+               appSecret: "76fd71dc9592983279d3145c646afb9f");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "276346784222-f6chgu68jej6l84f27lrfm4it4pknch4.apps.googleusercontent.com",
+                ClientSecret = "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"
+
+            });
         }
     }
 }
