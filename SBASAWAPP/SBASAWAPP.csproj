@@ -15,7 +15,7 @@
     <RootNamespace>SBASAWAPP</RootNamespace>
     <AssemblyName>SBASAWAPP</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -389,7 +389,6 @@
     <Content Include="Views\SALES\Details.cshtml" />
     <Content Include="Views\SALES\Edit.cshtml" />
     <Content Include="Views\SALES\Index.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\SHOPP_CART\Create.cshtml" />
     <Content Include="Views\SHOPP_CART\Delete.cshtml" />
     <Content Include="Views\SHOPP_CART\Details.cshtml" />
@@ -398,7 +397,6 @@
     <Content Include="Views\Shared\_REGISTER.cshtml" />
     <Content Include="Views\Shared\_EXTERNALACCOUNT.cshtml" />
     <Content Include="Views\Shared\_INICIO.cshtml" />
-=======
     <Content Include="Views\FACTURA\Create.cshtml" />
     <Content Include="Views\FACTURA\Index.cshtml" />
     <Content Include="Views\FACTURA\Details.cshtml" />
@@ -413,7 +411,6 @@
     <Content Include="Views\INSTALADOR\Index.cshtml" />
     <Content Include="Views\FACTURA\Delete.cshtml" />
     <Content Include="Views\FACTURA\Edit.cshtml" />
->>>>>>> dffb64aa45d71c5ad356341c53f2e15f67389289
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
