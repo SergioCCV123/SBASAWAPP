@@ -17,7 +17,7 @@
     <!-- Custom styles for this template-->
     <link href="~/Theme/css/sb-admin-2.min.css" rel="stylesheet">
 
-
+    @Styles.Render("~/bundles/datatablescss")
 </head>
 
 <body id="page-top">
@@ -66,6 +66,7 @@
                         <h6 class="collapse-header">Cruds</h6>
                         <a class="collapse-item" href="~/PRODUCT/Index">Productos</a>
                         <a class="collapse-item" href="~/SALES/Index">Ventas</a>
+                        <a class="collapse-item" href="~/INSTALADOR/Index">Instalaciones</a>
                     </div>
                 </div>
             </li>
@@ -443,7 +444,14 @@
     <script src="~/Theme/js/demo/chart-pie-demo.js"></script>
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/datatablesjs")
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#MiTabla').DataTable();
+        });
+    </script>
 
 </body>
 </html>

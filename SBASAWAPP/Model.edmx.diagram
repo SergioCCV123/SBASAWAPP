@@ -22,6 +22,7 @@
         <AssociationConnector Association="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_SA__5AEE82B9" />
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.FACTURA" Width="1.5" PointX="5.25" PointY="13.125" />
         <AssociationConnector Association="example5_SBASAWAPPModel.FK__FACTURA__IDUSUAR__5EBF139D" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.INSTALADOR" Width="1.5" PointX="7.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

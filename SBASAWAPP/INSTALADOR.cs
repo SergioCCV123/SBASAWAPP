@@ -12,11 +12,10 @@ namespace SBASAWAPP
     using System;
     using System.Collections.Generic;
     
-    public partial class C__MigrationHistory
+    public partial class INSTALADOR
     {
-        public string MigrationId { get; set; }
-        public string ContextKey { get; set; }
-        public byte[] Model { get; set; }
-        public string ProductVersion { get; set; }
+        public int IdRol { get; set; }
+        public string Nombre { get; set; }
+        public Nullable<System.DateTime> FechaRegistro { get; set; }
     }
 }
