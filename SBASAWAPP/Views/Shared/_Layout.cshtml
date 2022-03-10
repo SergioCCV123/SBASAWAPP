@@ -1,5 +1,7 @@
 ﻿@using SBASAWAPP.Models
 @using Microsoft.AspNet.Identity
+@using Microsoft.Owin.Security
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +56,11 @@
                         <a href="@Url.Action("Index", "Home")#Contacto" class="nav-link navTitles">Contacto</a>
                     </li>
                     <li class="nav-item active p-1">
+<<<<<<< HEAD
                         <a href="@Url.Action("Index", "SHOPP_CART")" class="nav-link navTitles"><i class="fas fa-shopping-cart" style="color: #094067; "></i></a>
+=======
+                        <a href="@Url.Action("Cart", "Home")" class="nav-link navTitles"><i class="fas fa-shopping-cart" style="color: #094067; "></i></a>
+>>>>>>> dffb64aa45d71c5ad356341c53f2e15f67389289
                     </li>
                     @if (Request.IsAuthenticated)
                     {
@@ -81,6 +87,12 @@
                         </button>
                     </li>
                 </ul>
+<<<<<<< HEAD
+            </div>
+        </div>
+    </nav>
+    <div class="modal fade" id="SignUpWindow" tabindex="-1" aria-labelledby="SignUpWindowLabel" aria-hidden="true">
+=======
             </div>
         </div>
     </nav>
@@ -89,6 +101,61 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="container text-center navTitles">
+                        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <h5 class="p-1">
+                                Crear Cuenta
+                            </h5>
+                            @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                            <div class="mb-3 form-group">
+                                @Html.LabelFor(m => Model.Model1.Email, new { @class = "form-label" })
+                                @Html.TextBoxFor(m => Model.Model1.Email, new { @class = "form-control" })
+                                <div id="emailHelp" class="form-text">Este correo Electronico nunca sera compartido</div>
+                            </div>
+                            <div class="mb-3 form-group">
+                                @Html.LabelFor(m => Model.Model1.Password, new { @class = "form-label" })
+                                @Html.PasswordFor(m => Model.Model1.Password, new { @class = "form-control" })
+                            </div>
+                            <div class="mb-3 form-group">
+                                @Html.LabelFor(m => Model.Model1.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                                @Html.PasswordFor(m => Model.Model1.ConfirmPassword, new { @class = "form-control" })
+                            </div>
+
+                            <div class="row p-1">
+                                <div class="btn-group" role="group" aria-label="Button Group">
+                                    <button type="button" class="btn btn-outline-dark p-1">
+                                        <i class="fab fa-google"></i>
+                                        <p>
+                                            @Html.Partial("_LoginPartial")
+                                        </p>
+                                    </button>
+                                    <button type="button" class="btn btn-outline-dark p-1">
+                                        <i class="fab fa-facebook-f"></i>
+                                        <p>
+                                            @Html.Partial("_LoginPartial")
+                                        </p>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="modal-footer form-group">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="Register" />
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="LoginWindow" tabindex="-1" aria-labelledby="LoginWindowLabel" aria-hidden="true">
+>>>>>>> dffb64aa45d71c5ad356341c53f2e15f67389289
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container text-center navTitles">
+<<<<<<< HEAD
                         @Html.Partial("_REGISTER", new RegisterViewModel())
                         <p>Or login with</p>
                         <div class="row p-1">
@@ -96,11 +163,64 @@
                                 @Html.Partial("_EXTERNALACCOUNT", new ExternalLoginListViewModel())
                             </div>
                         </div>
+=======
+                        <section id="loginForm">
+                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <h5 class="p-1">
+                                    Iniciar Sesion
+                                </h5>
+                                <hr />
+                                <div class="mb-3 form-group">
+                                    @Html.LabelFor(m => Model.Model2.Email, new { @class = "form-label" })
+                                    @Html.TextBoxFor(m => Model.Model2.Email, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => Model.Model2.Email, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="mb-3 form-group">
+                                    @Html.LabelFor(m => Model.Model2.Password, new { @class = "form-label" })
+                                    @Html.PasswordFor(m => Model.Model2.Password, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => Model.Model2.Password, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="mb-3 form-group">
+                                    <div class="checkbox">
+                                        @Html.CheckBoxFor(m => Model.Model2.RememberMe)
+                                        @Html.LabelFor(m => Model.Model2.RememberMe)
+                                    </div>
+                                </div>
+
+                                <h5 class="p-1">
+                                    -O-
+                                </h5>
+                                <div class="row p-1">
+                                    <div class="btn-group" role="group" aria-label="Button Group">
+                                        <button type="button" class="btn btn-outline-dark p-1">
+                                            <i class="fab fa-google"></i>
+                                            <p>
+                                                Iniciar Sesion con Google
+                                            </p>
+                                        </button>
+                                        <button type="button" class="btn btn-outline-dark p-1">
+                                            <i class="fab fa-facebook-f"></i>
+                                            <p>
+                                                Iniciar Sesion con Facebook
+                                            </p>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="modal-footer form-group">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    <input type="submit" value="Log in" class="btn btn-primary" />
+                                </div>
+                            }
+                        </section>
+>>>>>>> dffb64aa45d71c5ad356341c53f2e15f67389289
                     </div>
                 </div>
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     <div class="modal fade" id="LoginWindow" tabindex="-1" aria-labelledby="LoginWindowLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -132,6 +252,22 @@
             <div class="me-5" style="color:white">
                 <span>© 2020 Sistemas de Bombeo Arcor</span>
             </div>
+=======
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center justify-content-center">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @RenderBody()
+    </div>
+    <footer>
+        <img src="~/Img/footer.png" alt="waves" class="img-fluid" style="width:100%" />
+        <section class="d-flex justify-content-between p-4" style="background-color:#094067;">
+            <div class="me-5" style="color:white">
+                <span>© 2020 Sistemas de Bombeo Arcor</span>
+            </div>
+>>>>>>> dffb64aa45d71c5ad356341c53f2e15f67389289
             <div>
                 <a href="" class="text-white me-4">
                     <i class="fab fa-facebook-f"></i>
@@ -144,7 +280,10 @@
             $("#navbarSupportedContent").collapse("hide");
         });
     </script>
+<<<<<<< HEAD
     @RenderSection("scripts", required: false)
+=======
+>>>>>>> dffb64aa45d71c5ad356341c53f2e15f67389289
 </body>
 
 </html>
