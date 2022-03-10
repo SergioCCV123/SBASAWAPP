@@ -309,7 +309,6 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="FACTURA" EntitySet="FACTURA" />
           </AssociationSet>
-          <EntitySet Name="INSTALADOR" EntityType="example5_SBASAWAPPModel.INSTALADOR" />
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -481,14 +480,6 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="INSTALADOR">
-          <Key>
-            <PropertyRef Name="IdRol" />
-          </Key>
-          <Property Name="IdRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="FACTURA">
           <Key>
             <PropertyRef Name="IDFACTURA" />
