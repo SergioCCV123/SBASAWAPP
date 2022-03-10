@@ -17,6 +17,28 @@ namespace SBASAWAPP.Controllers
         // GET: PRODUCT
         public ActionResult Index()
         {
+
+            List<Models.CategoriesViewModels> lst = null;
+
+            lst = (from d in db.CATEGORIES
+                   select new Models.CategoriesViewModels
+                   {
+                       ID = d.ID,
+                       CATEGORY_NAME = d.CATEGORY_NAME
+                   }).ToList();
+
+            List<SelectListItem> items = lst.ConvertAll(d =>
+            {
+                return new SelectListItem()
+                {
+                    Text = d.CATEGORY_NAME.ToString(),
+                    Value = d.ID.ToString(),
+                    Selected = false
+                };
+            });
+
+            ViewBag.items = items;
+
             var pRODUCTS = db.PRODUCTS.Include(p => p.CATEGORIES);
             return View(pRODUCTS.ToList());
         }

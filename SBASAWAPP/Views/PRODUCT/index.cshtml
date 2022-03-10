@@ -1,58 +1,87 @@
 ﻿@model IEnumerable<SBASAWAPP.PRODUCT>
 
 @{
-    ViewBag.Title = "indez";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
 }
 
-<h2>indez</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DESCRIPTION)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PRICE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.URL)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CATEGORIES.CATEGORY_NAME)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DESCRIPTION)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PRICE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.URL)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CATEGORIES.CATEGORY_NAME)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
+@if (User.IsInRole("ADMIN"))
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
 }
 
-</table>
+<section id="main">
+    <div class="inner">
+
+
+
+        <section id="one" class="wrapper style1">
+            <header class="special">
+                <h2>Informacion de Ventas</h2>
+            </header>
+            <div class="content">
+                <table class="table" id="MiTabla" style="width:100%">
+
+
+                    <thead>
+
+                        <tr>
+                            <!--<th>
+                                @Html.DisplayNameFor(model => model.NAME)
+                            </th>-->
+                            <th>
+                                @Html.DisplayNameFor(model => model.CATEGORIES.CATEGORY_NAME)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                    </thead>   
+                        
+
+
+
+                            <!--{
+                                <p>Categoria: AHtml.DropDownList("ListadoCategorias", items, "Seleccione una categoria", new { Aclass = "form-control" })</p>
+                            }-->
+
+
+                            @foreach (var item in Model)
+                            {
+
+                                //if (item.CATEGORIES.CATEGORY_NAME == )
+                                //{
+
+                                //if (item.ACTIVE == true)
+                                //{
+
+                                <div class="menu">
+                                    <div class="products">
+                                        <div class="row center-xs">
+                                            <div class="col-xs-10 col-sm-6 col-md-4">
+                                                <div class="card">
+                                                    <img src="@item.URL">
+                                                    <h3>@item.NAME</h3>
+                                                    <p>Colones: @item.PRICE</p>
+                                                    @if (User.IsInRole("ADMIN"))
+                                                    {
+                                                        <p>
+                                                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                                        </p>
+
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                //}
+                                //}
+                            }
+
+                        </table>
