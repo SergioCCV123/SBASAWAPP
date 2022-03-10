@@ -12,11 +12,14 @@ namespace SBASAWAPP
     using System;
     using System.Collections.Generic;
     
-    public partial class C__MigrationHistory
+    public partial class FACTURA
     {
-        public string MigrationId { get; set; }
-        public string ContextKey { get; set; }
-        public byte[] Model { get; set; }
-        public string ProductVersion { get; set; }
+        public int IDFACTURA { get; set; }
+        public string IDUSUARIO { get; set; }
+        public System.DateTime FECHA { get; set; }
+        public float IVA { get; set; }
+        public float TOTAL { get; set; }
+        public int NUMPAGO { get; set; }
+        public Nullable<decimal> DESCUENTO { get; set; }
     }
 }
