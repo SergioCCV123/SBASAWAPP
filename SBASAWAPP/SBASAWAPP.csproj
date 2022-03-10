@@ -220,6 +220,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CategoriesViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="PRODUCT.cs">
@@ -378,6 +379,10 @@
     <Content Include="Views\FACTURA\Create.cshtml" />
     <Content Include="Views\FACTURA\Index.cshtml" />
     <Content Include="Views\FACTURA\Details.cshtml" />
+    <Content Include="Views\PRODUCT\Create.cshtml" />
+    <Content Include="Views\PRODUCT\Delete.cshtml" />
+    <Content Include="Views\PRODUCT\Details.cshtml" />
+    <Content Include="Views\PRODUCT\Edit.cshtml" />
     <Content Include="Views\INSTALADOR\Create.cshtml" />
     <Content Include="Views\INSTALADOR\Delete.cshtml" />
     <Content Include="Views\INSTALADOR\Details.cshtml" />
