@@ -105,8 +105,8 @@
           <Property Name="CATEGORY" Type="int" />
           <Property Name="ACTIVE" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'example5_SBASAWAPP.dbo.PRODUCTSPS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PRODUCTSPS">
           <Key>
             <PropertyRef Name="ID_SALE" />
@@ -305,6 +305,11 @@ warning 6002: The table/view 'example5_SBASAWAPP.dbo.PRODUCTSPS' does not have a
           </AssociationSet>
           <EntitySet Name="INSTALADOR" EntityType="example5_SBASAWAPPModel.INSTALADOR" />
           <EntitySet Name="FACTURA" EntityType="example5_SBASAWAPPModel.FACTURA" />
+          <AssociationSet Name="FK__FACTURA__IDUSUAR__5EBF139D" Association="example5_SBASAWAPPModel.FK__FACTURA__IDUSUAR__5EBF139D">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
+          </AssociationSet>
+          <EntitySet Name="INSTALADOR" EntityType="example5_SBASAWAPPModel.INSTALADOR" />
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -496,6 +501,26 @@ warning 6002: The table/view 'example5_SBASAWAPP.dbo.PRODUCTSPS' does not have a
           <Property Name="NUMPAGO" Type="Int32" Nullable="false" />
           <Property Name="DESCUENTO" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
+        <Association Name="FK__FACTURA__IDUSUAR__5EBF139D">
+          <End Type="example5_SBASAWAPPModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="example5_SBASAWAPPModel.FACTURA" Role="FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="INSTALADOR">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -623,6 +648,15 @@ warning 6002: The table/view 'example5_SBASAWAPP.dbo.PRODUCTSPS' does not have a
                 <ScalarProperty Name="FECHA" ColumnName="FECHA" />
                 <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
                 <ScalarProperty Name="IDFACTURA" ColumnName="IDFACTURA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INSTALADOR">
+            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.INSTALADOR">
+              <MappingFragment StoreEntitySet="INSTALADOR">
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

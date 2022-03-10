@@ -188,6 +188,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\FACTURAController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\INSTALADORController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PRODUCTController.cs" />
     <Compile Include="Controllers\SALESController.cs" />
@@ -253,6 +254,7 @@
     <Content Include="Content\chart-area-demo.js" />
     <Content Include="Content\chart-pie-demo.js" />
     <Content Include="Content\Chart.min.js" />
+    <Content Include="Content\datatables.css" />
     <Content Include="Content\jquery.easing.min.js" />
     <Content Include="Content\MainStyles.css" />
     <Content Include="Content\sb-admin-2.min.css" />
@@ -321,6 +323,7 @@
     <None Include="Properties\PublishProfiles\bombasarcor.co.cr - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\datatables.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -375,6 +378,11 @@
     <Content Include="Views\FACTURA\Create.cshtml" />
     <Content Include="Views\FACTURA\Index.cshtml" />
     <Content Include="Views\FACTURA\Details.cshtml" />
+    <Content Include="Views\INSTALADOR\Create.cshtml" />
+    <Content Include="Views\INSTALADOR\Delete.cshtml" />
+    <Content Include="Views\INSTALADOR\Details.cshtml" />
+    <Content Include="Views\INSTALADOR\Edit.cshtml" />
+    <Content Include="Views\INSTALADOR\Index.cshtml" />
     <Content Include="Views\FACTURA\Delete.cshtml" />
     <Content Include="Views\FACTURA\Edit.cshtml" />
   </ItemGroup>

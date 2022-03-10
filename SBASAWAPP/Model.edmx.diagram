@@ -20,6 +20,9 @@
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.PRODUCTSPS" Width="1.5" PointX="7.875" PointY="7.25" />
         <AssociationConnector Association="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_PR__5BE2A6F2" />
         <AssociationConnector Association="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_SA__5AEE82B9" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.FACTURA" Width="1.5" PointX="5.25" PointY="13.125" />
+        <AssociationConnector Association="example5_SBASAWAPPModel.FK__FACTURA__IDUSUAR__5EBF139D" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.INSTALADOR" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.INSTALADOR" Width="1.5" PointX="8.375" PointY="2.625" />
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.FACTURA" Width="1.5" PointX="2" PointY="9.875" />
       </Diagram>
