@@ -4,11 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cd1ba7984ba34ab2bff721c72bb986d1" Name="Diagram1" >
       <Diagram DiagramId="cd1ba7984ba34ab2bff721c72bb986d1" Name="Diagram1" ZoomLevel="96" >
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="6.75" />
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" />
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="3.625" />
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.AspNetUserClaim" Width="1.5" PointX="5.5" PointY="3.625" />
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="1" />
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.AspNetUser" Width="1.5" PointX="3" PointY="1.375" />
@@ -22,19 +20,11 @@
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.PRODUCTSPS" Width="1.5" PointX="7.875" PointY="7.25" />
         <AssociationConnector Association="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_PR__5BE2A6F2" />
         <AssociationConnector Association="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_SA__5AEE82B9" />
-<<<<<<< HEAD
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.FACTURA" Width="1.5" PointX="0.75" PointY="9.75" />
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.INSTALADOR" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.SHOPP_CART" Width="1.5" PointX="8.25" PointY="3.625" />
-        <AssociationConnector Association="example5_SBASAWAPPModel.FK__SHOPP_CAR__ID_US__6D0D32F4" />
-        <AssociationConnector Association="example5_SBASAWAPPModel.FK__SHOPP_CAR__ID_PR__6E01572D" />
-=======
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.FACTURA" Width="1.5" PointX="5.25" PointY="13.125" />
         <AssociationConnector Association="example5_SBASAWAPPModel.FK__FACTURA__IDUSUAR__5EBF139D" />
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.INSTALADOR" Width="1.5" PointX="7.375" PointY="0.75" />
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.INSTALADOR" Width="1.5" PointX="8.375" PointY="2.625" />
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.FACTURA" Width="1.5" PointX="2" PointY="9.875" />
->>>>>>> dffb64aa45d71c5ad356341c53f2e15f67389289
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

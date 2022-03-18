@@ -14,8 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SBASAWAPP</RootNamespace>
     <AssemblyName>SBASAWAPP</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -64,10 +63,6 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -125,12 +120,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -203,7 +192,6 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PRODUCTController.cs" />
     <Compile Include="Controllers\SALESController.cs" />
-    <Compile Include="Controllers\SHOPP_CARTController.cs" />
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -243,9 +231,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SALES.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SHOPP_CART.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
@@ -363,11 +348,13 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
@@ -389,21 +376,9 @@
     <Content Include="Views\SALES\Details.cshtml" />
     <Content Include="Views\SALES\Edit.cshtml" />
     <Content Include="Views\SALES\Index.cshtml" />
-    <Content Include="Views\SHOPP_CART\Create.cshtml" />
-    <Content Include="Views\SHOPP_CART\Delete.cshtml" />
-    <Content Include="Views\SHOPP_CART\Details.cshtml" />
-    <Content Include="Views\SHOPP_CART\Edit.cshtml" />
-    <Content Include="Views\SHOPP_CART\Index.cshtml" />
-    <Content Include="Views\Shared\_REGISTER.cshtml" />
-    <Content Include="Views\Shared\_EXTERNALACCOUNT.cshtml" />
-    <Content Include="Views\Shared\_INICIO.cshtml" />
     <Content Include="Views\FACTURA\Create.cshtml" />
     <Content Include="Views\FACTURA\Index.cshtml" />
     <Content Include="Views\FACTURA\Details.cshtml" />
-    <Content Include="Views\PRODUCT\Create.cshtml" />
-    <Content Include="Views\PRODUCT\Delete.cshtml" />
-    <Content Include="Views\PRODUCT\Details.cshtml" />
-    <Content Include="Views\PRODUCT\Edit.cshtml" />
     <Content Include="Views\INSTALADOR\Create.cshtml" />
     <Content Include="Views\INSTALADOR\Delete.cshtml" />
     <Content Include="Views\INSTALADOR\Details.cshtml" />
@@ -411,6 +386,10 @@
     <Content Include="Views\INSTALADOR\Index.cshtml" />
     <Content Include="Views\FACTURA\Delete.cshtml" />
     <Content Include="Views\FACTURA\Edit.cshtml" />
+    <Content Include="Views\PRODUCT\Create.cshtml" />
+    <Content Include="Views\PRODUCT\Delete.cshtml" />
+    <Content Include="Views\PRODUCT\Details.cshtml" />
+    <Content Include="Views\PRODUCT\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -455,11 +434,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
-  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

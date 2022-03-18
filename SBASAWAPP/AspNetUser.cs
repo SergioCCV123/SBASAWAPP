@@ -20,7 +20,6 @@ namespace SBASAWAPP
             this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
             this.AspNetRoles = new HashSet<AspNetRole>();
-            this.SHOPP_CART = new HashSet<SHOPP_CART>();
         }
     
         public string Id { get; set; }
@@ -42,7 +41,5 @@ namespace SBASAWAPP
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SHOPP_CART> SHOPP_CART { get; set; }
     }
 }

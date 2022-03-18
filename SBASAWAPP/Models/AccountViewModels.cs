@@ -46,6 +46,12 @@ namespace SBASAWAPP.Models
         public string Email { get; set; }
     }
 
+    public class MainViewModel
+    {
+        public LoginViewModel Model2 { get; set; }
+        public RegisterViewModel Model1 { get; set;}
+    }
+
     public class LoginViewModel
     {
         [Required]

@@ -6,6 +6,7 @@
     List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
 }
 
+<h2>Index</h2>
 
 @if (User.IsInRole("ADMIN"))
 {
@@ -14,74 +15,46 @@
     </p>
 }
 
-<section id="main">
-    <div class="inner">
+<table class="table">
+
+    @{
+        <p>Categoria: @Html.DropDownList("ListadoCategorias", items, "Seleccione una categoria", new { @class = "form-control" })</p>
+    }
 
 
+    @foreach (var item in Model)
+    {
 
-        <section id="one" class="wrapper style1">
-            <header class="special">
-                <h2>Informacion de Ventas</h2>
-            </header>
-            <div class="content">
-                <table class="table" id="MiTabla" style="width:100%">
+        //if (item.CATEGORIES.CATEGORY_NAME == )
+        //{
 
+        if (item.ACTIVE == true)
+        {
 
-                    <thead>
+            <div class="menu">
+                <div class="products">
+                    <div class="row center-xs">
+                        <div class="col-xs-10 col-sm-6 col-md-4">
+                            <div class="card">
+                                <img src="@item.URL">
+                                <h3>@item.NAME</h3>
+                                <p>Colones: @item.PRICE</p>
+                                @if (User.IsInRole("ADMIN"))
+                                {
+                                <p>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                </p>
 
-                        <tr>
-                            <!--<th>
-                                @Html.DisplayNameFor(model => model.NAME)
-                            </th>-->
-                            <th>
-                                @Html.DisplayNameFor(model => model.CATEGORIES.CATEGORY_NAME)
-                            </th>
-                            <th></th>
-                        </tr>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                    </thead>   
-                        
+        }
+        //}
+    }
 
-
-
-                            <!--{
-                                <p>Categoria: AHtml.DropDownList("ListadoCategorias", items, "Seleccione una categoria", new { Aclass = "form-control" })</p>
-                            }-->
-
-
-                            @foreach (var item in Model)
-                            {
-
-                                //if (item.CATEGORIES.CATEGORY_NAME == )
-                                //{
-
-                                //if (item.ACTIVE == true)
-                                //{
-
-                                <div class="menu">
-                                    <div class="products">
-                                        <div class="row center-xs">
-                                            <div class="col-xs-10 col-sm-6 col-md-4">
-                                                <div class="card">
-                                                    <img src="@item.URL">
-                                                    <h3>@item.NAME</h3>
-                                                    <p>Colones: @item.PRICE</p>
-                                                    @if (User.IsInRole("ADMIN"))
-                                                    {
-                                                        <p>
-                                                            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                                            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                                                        </p>
-
-                                                    }
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                //}
-                                //}
-                            }
-
-                        </table>
+</table>

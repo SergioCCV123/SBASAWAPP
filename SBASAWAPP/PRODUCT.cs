@@ -18,7 +18,6 @@ namespace SBASAWAPP
         public PRODUCT()
         {
             this.PRODUCTSPS = new HashSet<PRODUCTSPS>();
-            this.SHOPP_CART = new HashSet<SHOPP_CART>();
         }
     
         public int ID { get; set; }
@@ -32,7 +31,5 @@ namespace SBASAWAPP
         public virtual CATEGORIES CATEGORIES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCTSPS> PRODUCTSPS { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SHOPP_CART> SHOPP_CART { get; set; }
     }
 }
