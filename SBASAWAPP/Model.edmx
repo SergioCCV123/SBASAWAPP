@@ -105,8 +105,8 @@
           <Property Name="CATEGORY" Type="int" />
           <Property Name="ACTIVE" Type="bit" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'example5_SBASAWAPP.dbo.PRODUCTSPS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="PRODUCTSPS">
           <Key>
             <PropertyRef Name="ID_SALE" />
@@ -124,16 +124,6 @@ warning 6002: The table/view 'example5_SBASAWAPP.dbo.PRODUCTSPS' does not have a
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CLIENT_NAME" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="SALE_TOTAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'example5_SBASAWAPP.example5_ADMIN.SHOPP_CART' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="SHOPP_CART">
-          <Key>
-            <PropertyRef Name="QUANTITY" />
-          </Key>
-          <Property Name="ID_USER" Type="nvarchar" MaxLength="128" />
-          <Property Name="ID_PRODUCT" Type="int" />
-          <Property Name="QUANTITY" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__PRODUCTS__CATEGO__4AB81AF0">
           <End Role="CATEGORIES" Type="Self.CATEGORIES" Multiplicity="0..1" />
@@ -168,30 +158,6 @@ warning 6002: The table/view 'example5_SBASAWAPP.example5_ADMIN.SHOPP_CART' does
             </Principal>
             <Dependent Role="PRODUCTSPS">
               <PropertyRef Name="ID_SALE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__SHOPP_CAR__ID_PR__6E01572D">
-          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="0..1" />
-          <End Role="SHOPP_CART" Type="Self.SHOPP_CART" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODUCTS">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="SHOPP_CART">
-              <PropertyRef Name="ID_PRODUCT" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__SHOPP_CAR__ID_US__6D0D32F4">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="SHOPP_CART" Type="Self.SHOPP_CART" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SHOPP_CART">
-              <PropertyRef Name="ID_USER" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -270,13 +236,6 @@ warning 6002: The table/view 'example5_SBASAWAPP.example5_ADMIN.SHOPP_CART' does
     [PRODUCTSPS].[QUANTITY] AS [QUANTITY]
     FROM [dbo].[PRODUCTSPS] AS [PRODUCTSPS]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="SHOPP_CART" EntityType="Self.SHOPP_CART" store:Type="Tables" store:Schema="example5_ADMIN">
-            <DefiningQuery>SELECT 
-    [SHOPP_CART].[ID_USER] AS [ID_USER], 
-    [SHOPP_CART].[ID_PRODUCT] AS [ID_PRODUCT], 
-    [SHOPP_CART].[QUANTITY] AS [QUANTITY]
-    FROM [example5_ADMIN].[SHOPP_CART] AS [SHOPP_CART]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK__PRODUCTS__CATEGO__4AB81AF0" Association="Self.FK__PRODUCTS__CATEGO__4AB81AF0">
             <End Role="CATEGORIES" EntitySet="CATEGORIES" />
             <End Role="PRODUCTS" EntitySet="PRODUCTS" />
@@ -288,14 +247,6 @@ warning 6002: The table/view 'example5_SBASAWAPP.example5_ADMIN.SHOPP_CART' does
           <AssociationSet Name="FK__PRODUCTSP__ID_SA__5AEE82B9" Association="Self.FK__PRODUCTSP__ID_SA__5AEE82B9">
             <End Role="SALES" EntitySet="SALES" />
             <End Role="PRODUCTSPS" EntitySet="PRODUCTSPS" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SHOPP_CAR__ID_PR__6E01572D" Association="Self.FK__SHOPP_CAR__ID_PR__6E01572D">
-            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
-            <End Role="SHOPP_CART" EntitySet="SHOPP_CART" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SHOPP_CAR__ID_US__6D0D32F4" Association="Self.FK__SHOPP_CAR__ID_US__6D0D32F4">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="SHOPP_CART" EntitySet="SHOPP_CART" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -352,16 +303,11 @@ warning 6002: The table/view 'example5_SBASAWAPP.example5_ADMIN.SHOPP_CART' does
             <End Role="SALES" EntitySet="SALES" />
             <End Role="PRODUCTSPS" EntitySet="PRODUCTSPS" />
           </AssociationSet>
-          <EntitySet Name="FACTURA" EntityType="example5_SBASAWAPPModel.FACTURA" />
           <EntitySet Name="INSTALADOR" EntityType="example5_SBASAWAPPModel.INSTALADOR" />
-          <EntitySet Name="SHOPP_CART" EntityType="example5_SBASAWAPPModel.SHOPP_CART" />
-          <AssociationSet Name="FK__SHOPP_CAR__ID_US__6D0D32F4" Association="example5_SBASAWAPPModel.FK__SHOPP_CAR__ID_US__6D0D32F4">
+          <EntitySet Name="FACTURA" EntityType="example5_SBASAWAPPModel.FACTURA" />
+          <AssociationSet Name="FK__FACTURA__IDUSUAR__5EBF139D" Association="example5_SBASAWAPPModel.FK__FACTURA__IDUSUAR__5EBF139D">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="SHOPP_CART" EntitySet="SHOPP_CART" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SHOPP_CAR__ID_PR__6E01572D" Association="example5_SBASAWAPPModel.FK__SHOPP_CAR__ID_PR__6E01572D">
-            <End Role="PRODUCT" EntitySet="PRODUCTS" />
-            <End Role="SHOPP_CART" EntitySet="SHOPP_CART" />
+            <End Role="FACTURA" EntitySet="FACTURA" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -422,7 +368,6 @@ warning 6002: The table/view 'example5_SBASAWAPP.example5_ADMIN.SHOPP_CART' does
           <NavigationProperty Name="AspNetUserClaims" Relationship="example5_SBASAWAPPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="example5_SBASAWAPPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
           <NavigationProperty Name="AspNetRoles" Relationship="example5_SBASAWAPPModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
-          <NavigationProperty Name="SHOPP_CART" Relationship="example5_SBASAWAPPModel.FK__SHOPP_CAR__ID_US__6D0D32F4" FromRole="AspNetUser" ToRole="SHOPP_CART" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Type="example5_SBASAWAPPModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
@@ -469,7 +414,6 @@ warning 6002: The table/view 'example5_SBASAWAPP.example5_ADMIN.SHOPP_CART' does
           <NavigationProperty Name="CATEGORIES" Relationship="example5_SBASAWAPPModel.FK__PRODUCTS__CATEGO__4AB81AF0" FromRole="PRODUCT" ToRole="CATEGORIES" />
           <NavigationProperty Name="PRODUCTSPS" Relationship="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_PR__5BE2A6F2" FromRole="PRODUCT" ToRole="PRODUCTSPS" />
           <Property Name="ACTIVE" Type="Boolean" />
-          <NavigationProperty Name="SHOPP_CART" Relationship="example5_SBASAWAPPModel.FK__SHOPP_CAR__ID_PR__6E01572D" FromRole="PRODUCT" ToRole="SHOPP_CART" />
         </EntityType>
         <EntityType Name="CATEGORIES">
           <Key>
@@ -548,6 +492,18 @@ warning 6002: The table/view 'example5_SBASAWAPP.example5_ADMIN.SHOPP_CART' does
           <Property Name="NUMPAGO" Type="Int32" Nullable="false" />
           <Property Name="DESCUENTO" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
+        <Association Name="FK__FACTURA__IDUSUAR__5EBF139D">
+          <End Type="example5_SBASAWAPPModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="example5_SBASAWAPPModel.FACTURA" Role="FACTURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FACTURA">
+              <PropertyRef Name="IDUSUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="INSTALADOR">
           <Key>
             <PropertyRef Name="IdRol" />
@@ -556,40 +512,6 @@ warning 6002: The table/view 'example5_SBASAWAPP.example5_ADMIN.SHOPP_CART' does
           <Property Name="Nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="SHOPP_CART">
-          <Key>
-            <PropertyRef Name="QUANTITY" />
-          </Key>
-          <Property Name="ID_USER" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ID_PRODUCT" Type="Int32" />
-          <Property Name="QUANTITY" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="example5_SBASAWAPPModel.FK__SHOPP_CAR__ID_US__6D0D32F4" FromRole="SHOPP_CART" ToRole="AspNetUser" />
-          <NavigationProperty Name="PRODUCTS" Relationship="example5_SBASAWAPPModel.FK__SHOPP_CAR__ID_PR__6E01572D" FromRole="SHOPP_CART" ToRole="PRODUCT" />
-        </EntityType>
-        <Association Name="FK__SHOPP_CAR__ID_US__6D0D32F4">
-          <End Type="example5_SBASAWAPPModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
-          <End Type="example5_SBASAWAPPModel.SHOPP_CART" Role="SHOPP_CART" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="SHOPP_CART">
-              <PropertyRef Name="ID_USER" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__SHOPP_CAR__ID_PR__6E01572D">
-          <End Type="example5_SBASAWAPPModel.PRODUCT" Role="PRODUCT" Multiplicity="0..1" />
-          <End Type="example5_SBASAWAPPModel.SHOPP_CART" Role="SHOPP_CART" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PRODUCT">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="SHOPP_CART">
-              <PropertyRef Name="ID_PRODUCT" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -698,6 +620,15 @@ warning 6002: The table/view 'example5_SBASAWAPP.example5_ADMIN.SHOPP_CART' does
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="INSTALADOR">
+            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.INSTALADOR">
+              <MappingFragment StoreEntitySet="INSTALADOR">
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="FACTURA">
             <EntityTypeMapping TypeName="example5_SBASAWAPPModel.FACTURA">
               <MappingFragment StoreEntitySet="FACTURA">
@@ -717,15 +648,6 @@ warning 6002: The table/view 'example5_SBASAWAPP.example5_ADMIN.SHOPP_CART' does
                 <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SHOPP_CART">
-            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.SHOPP_CART">
-              <MappingFragment StoreEntitySet="SHOPP_CART">
-                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
-                <ScalarProperty Name="ID_PRODUCT" ColumnName="ID_PRODUCT" />
-                <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
