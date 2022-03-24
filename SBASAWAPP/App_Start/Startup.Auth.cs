@@ -62,7 +62,6 @@ namespace SBASAWAPP
             {
                 ClientId = "276346784222-f6chgu68jej6l84f27lrfm4it4pknch4.apps.googleusercontent.com",
                 ClientSecret = "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"
-
             });
         }
     }

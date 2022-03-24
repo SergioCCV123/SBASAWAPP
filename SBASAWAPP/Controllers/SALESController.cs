@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using OfficeOpenXml;
 using SBASAWAPP;
+using Syncfusion.XlsIO;
 
 namespace SBASAWAPP.Controllers
 {
     public class SALESController : Controller
     {
         private example5_SBASAWAPPEntities db = new example5_SBASAWAPPEntities();
+
 
         // GET: SALES
         public ActionResult Index()
@@ -122,6 +126,28 @@ namespace SBASAWAPP.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Excel()
+        {
+            var list = new List<SALES>();
+            list = db.SALES.ToList();
+            var stream = new MemoryStream();
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            using (var package = new ExcelPackage(stream))
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Sales");
+                worksheet.Cells.LoadFromCollection(list);
+                worksheet.Column(4).Hidden = true;
+                package.Save();
+            }
+
+            stream.Position = 0;
+            string excelName = $"SALES-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xlsx";
+
+            return File(stream, "application/octet-stream", excelName);
+
         }
     }
 }
