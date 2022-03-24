@@ -11,13 +11,15 @@ namespace SBASAWAPP
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Data.Entity;
+
     public partial class PRODUCT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PRODUCT()
         {
             this.PRODUCTSPS = new HashSet<PRODUCTSPS>();
+            this.SHOPP_CART = new HashSet<SHOPP_CART>();
         }
     
         public int ID { get; set; }
@@ -31,5 +33,12 @@ namespace SBASAWAPP
         public virtual CATEGORIES CATEGORIES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCTSPS> PRODUCTSPS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SHOPP_CART> SHOPP_CART { get; set; }
+
+        public class SampleContext : DbContext
+        {
+            public DbSet<PRODUCT> Products { get; set; }
+        }
     }
 }

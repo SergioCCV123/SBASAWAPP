@@ -1,8 +1,6 @@
 ﻿@using SBASAWAPP.Models
-@model MainViewModel
 @using Microsoft.AspNet.Identity
 @using Microsoft.Owin.Security
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,49 +90,13 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="container text-center navTitles">
-                        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            <h5 class="p-1">
-                                Crear Cuenta
-                            </h5>
-                            @Html.ValidationSummary("", new { @class = "text-danger" })
-
-                            <div class="mb-3 form-group">
-                                @Html.LabelFor(m => Model.Model1.Email, new { @class = "form-label" })
-                                @Html.TextBoxFor(m => Model.Model1.Email, new { @class = "form-control" })
-                                <div id="emailHelp" class="form-text">Este correo Electronico nunca sera compartido</div>
+                        @Html.Partial("_REGISTER", new RegisterViewModel())
+                        <p>Or login with</p>
+                        <div class="row p-1">
+                            <div class="btn-group text-center justify-content-center" role="group" aria-label="Button Group">
+                                @Html.Partial("_EXTERNALACCOUNT", new ExternalLoginListViewModel())
                             </div>
-                            <div class="mb-3 form-group">
-                                @Html.LabelFor(m => Model.Model1.Password, new { @class = "form-label" })
-                                @Html.PasswordFor(m => Model.Model1.Password, new { @class = "form-control" })
-                            </div>
-                            <div class="mb-3 form-group">
-                                @Html.LabelFor(m => Model.Model1.ConfirmPassword, new { @class = "col-md-2 control-label" })
-                                @Html.PasswordFor(m => Model.Model1.ConfirmPassword, new { @class = "form-control" })
-                            </div>
-
-                            <div class="row p-1">
-                                <div class="btn-group" role="group" aria-label="Button Group">
-                                    <button type="button" class="btn btn-outline-dark p-1">
-                                        <i class="fab fa-google"></i>
-                                        <p>
-                                            @Html.Partial("_LoginPartial")
-                                        </p>
-                                    </button>
-                                    <button type="button" class="btn btn-outline-dark p-1">
-                                        <i class="fab fa-facebook-f"></i>
-                                        <p>
-                                            @Html.Partial("_LoginPartial")
-                                        </p>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="modal-footer form-group">
-                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                <input type="submit" class="btn btn-primary" value="Register" />
-                            </div>
-                        }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -145,56 +107,13 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="container text-center navTitles">
-                        <section id="loginForm">
-                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                            {
-                                @Html.AntiForgeryToken()
-                                <h5 class="p-1">
-                                    Iniciar Sesion
-                                </h5>
-                                <hr />
-                                <div class="mb-3 form-group">
-                                    @Html.LabelFor(m => Model.Model2.Email, new { @class = "form-label" })
-                                    @Html.TextBoxFor(m => Model.Model2.Email, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => Model.Model2.Email, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="mb-3 form-group">
-                                    @Html.LabelFor(m => Model.Model2.Password, new { @class = "form-label" })
-                                    @Html.PasswordFor(m => Model.Model2.Password, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => Model.Model2.Password, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="mb-3 form-group">
-                                    <div class="checkbox">
-                                        @Html.CheckBoxFor(m => Model.Model2.RememberMe)
-                                        @Html.LabelFor(m => Model.Model2.RememberMe)
-                                    </div>
-                                </div>
-
-                                <h5 class="p-1">
-                                    -O-
-                                </h5>
-                                <div class="row p-1">
-                                    <div class="btn-group" role="group" aria-label="Button Group">
-                                        <button type="button" class="btn btn-outline-dark p-1">
-                                            <i class="fab fa-google"></i>
-                                            <p>
-                                                Iniciar Sesion con Google
-                                            </p>
-                                        </button>
-                                        <button type="button" class="btn btn-outline-dark p-1">
-                                            <i class="fab fa-facebook-f"></i>
-                                            <p>
-                                                Iniciar Sesion con Facebook
-                                            </p>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="modal-footer form-group">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    <input type="submit" value="Log in" class="btn btn-primary" />
-                                </div>
-                            }
-                        </section>
+                        @Html.Partial("_INICIO", new LoginViewModel())
+                        <p>Or login with</p>
+                        <div class="row p-1">
+                            <div class="btn-group text-center justify-content-center" role="group" aria-label="Button Group">
+                                @Html.Partial("_EXTERNALACCOUNT", new ExternalLoginListViewModel())
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
