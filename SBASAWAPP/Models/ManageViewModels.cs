@@ -28,14 +28,14 @@ namespace SBASAWAPP.Models
     public class SetPasswordViewModel
     {
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "El {0} debe tener al menos {2} caracteres.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Nueva Contraseña")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Confirmar Contraseña")]
+        [Compare("NewPassword", ErrorMessage = "La nueva contraseña y la confirmacion no son iguales.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -43,24 +43,24 @@ namespace SBASAWAPP.Models
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        [Display(Name = "Contraseña Actual")]
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "El {0} debe tener al menos {2} caracteres.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Nueva Contraseña")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Confirmar Contraseña")]
+        [Compare("NewPassword", ErrorMessage = "La nueva contraseña y la confirmacion no son iguales.")]
         public string ConfirmPassword { get; set; }
     }
 
     public class ChangeUserNameViewModel
     {
-        [Display(Name = "New User Name")]
+        [Display(Name = "Nuevo Nombre de Usuario")]
         public string UserName { get; set; }
     }
 
@@ -68,19 +68,19 @@ namespace SBASAWAPP.Models
     {
         [Required]
         [Phone]
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Telefono")]
         public string Number { get; set; }
     }
 
     public class VerifyPhoneNumberViewModel
     {
         [Required]
-        [Display(Name = "Code")]
+        [Display(Name = "Codigo")]
         public string Code { get; set; }
 
         [Required]
         [Phone]
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Telefono")]
         public string PhoneNumber { get; set; }
     }
 

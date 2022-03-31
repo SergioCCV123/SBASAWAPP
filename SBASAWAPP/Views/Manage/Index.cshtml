@@ -14,16 +14,16 @@
         <div class="row">
             @*<div class="col-xl-4">
 
-                <div class="card">
-                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                    <div class="card">
+                        <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-                        <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                        <h2>Kevin Anderson</h2>
-                        <h3>Web Designer</h3>
+                            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                            <h2>Kevin Anderson</h2>
+                            <h3>Web Designer</h3>
+                        </div>
                     </div>
-                </div>
 
-            </div>*@
+                </div>*@
 
             <div class="col-xl-8">
 
@@ -59,7 +59,7 @@
                                         @Html.ActionLink("[Cambiar Nombre de Usuario]", "ChangeUsername", "Manage")
                                     </dd>
 
-                                    <dt>Telefono:</dt>
+                                    <dt>Teléfono:</dt>
                                     <dd>
                                         @(Model.PhoneNumber ?? "Ninguno") [
                                         @if (Model.PhoneNumber != null)
@@ -193,37 +193,39 @@
                             <div class="tab-pane fade show active profile-overview" id="profile-others">
 
                                 <form>
+                                    <dl class="dl-horizontal">
+                                        <dt>Inicio de Seccion Externos:</dt>
+                                        <dd>
+                                            @Model.Logins.Count [
+                                            @Html.ActionLink("Administrar", "ManageLogins") ]
+                                        </dd>
 
-                                    <dt>Inicio de Seccion Externos:</dt>
-                                    <dd>
-                                        @Model.Logins.Count [
-                                        @Html.ActionLink("Administrar", "ManageLogins") ]
-                                    </dd>
 
-                                    <dt>Autenticación de dos factores:</dt>
-                                    <dd>
-                                        @if (Model.TwoFactor)
-                                        {
-                                            using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+
+                                        @*<dt>Autenticación de dos factores:</dt>
+                                        <dd>
+                                            @if (Model.TwoFactor)
                                             {
-                                                @Html.AntiForgeryToken()
-                                                <text>Activado
-                                                    <input type="submit" value="Disable" class="btn btn-link" />
-                                                </text>
+                                                using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    <text>Activado
+                                                        <input type="submit" value="Desactivado" class="btn btn-link" />
+                                                    </text>
+                                                }
                                             }
-                                        }
-                                        else
-                                        {
-                                            using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                            else
                                             {
-                                                @Html.AntiForgeryToken()
-                                                <text>Desactivado
-                                                    <input type="submit" value="Enable" class="btn btn-link" />
-                                                </text>
+                                                using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    <text>Desactivado
+                                                        <input type="submit" value="Activado" class="btn btn-link" />
+                                                    </text>
+                                                }
                                             }
-                                        }
-                                    </dd>
-
+                                        </dd>*@
+                                    </dl>
                                 </form>
 
                                 @*<h5 class="card-title">Profile Details</h5>
@@ -271,65 +273,15 @@
         </div>
     </section>
 
-
-    @*<div>
-        <h4>Change your account settings</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>Password:</dt>
-            <dd>
-                [
-                @if (Model.HasPassword)
-                {
-                    @Html.ActionLink("Change your password", "ChangePassword")
-                }
-                else
-                {
-                    @Html.ActionLink("Create", "SetPassword")
-                }
-                ]
-            </dd>
-            <dt>Username:</dt>
-            <dd>
-                @User.Identity.Name
-                @Html.ActionLink("[Change Username]", "ChangeUsername", "Manage")
-            </dd>
-            <dt>External Logins:</dt>
-            <dd>
-                @Model.Logins.Count [
-                @Html.ActionLink("Manage", "ManageLogins") ]
-            </dd>
-            @*
-            Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-
-             See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-
-             Uncomment the following block after you have set up two-factor authentication
-    <dt>Phone Number:</dt>
-    <dd>
-        @(Model.PhoneNumber ?? "None") [
-        @if (Model.PhoneNumber != null)
-        {
-            @Html.ActionLink("Change", "AddPhoneNumber")
-            @: &nbsp;|&nbsp;
-            @Html.ActionLink("Remove", "RemovePhoneNumber")
-        }
-        else
-        {
-            @Html.ActionLink("Add", "AddPhoneNumber")
-        }
-        ]
-    </dd>
-    <dt>Two-Factor Authentication:</dt>
+    <dt>Autenticación de dos factores:</dt>
     <dd>
         @if (Model.TwoFactor)
         {
             using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <text>Enabled
-                    <input type="submit" value="Disable" class="btn btn-link" />
+                <text>Activado
+                    <input type="submit" value="Desactivado" class="btn btn-link" />
                 </text>
             }
         }
@@ -338,11 +290,10 @@
             using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <text>Disabled
-                    <input type="submit" value="Enable" class="btn btn-link" />
+                <text>Desactivado
+                    <input type="submit" value="Activado" class="btn btn-link" />
                 </text>
             }
         }
     </dd>
-    </dl>
-    </div>*@
+
