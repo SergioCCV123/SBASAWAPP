@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Graficos";
+}
+<div class="row" style="margin-top:20px">
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading"> Reporte de Inatalaciones</div>
+            <div class="panel-body">
+                <canvas id="myBarChart" width="150" height="70"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading"> Reporte de Producto mas vendido</div>
+            <div class="panel-body">
+                <canvas id="myPieChart" width="150" height="70"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+        var controlBar = document.getElementById("myBarChart");
+
+        var graficobar = new Chart(controlBar, {
+            type: 'bar',
+            data: {
+                labels: ["Limón", "Alajuela", "Heredia", "San Jose", "Guanacaste", "Cartago", "Puntarenas"],
+                datasets: [
+                    {
+                        label: "reporte",
+                        backgroundColor: "#BB2100",
+                        data: [5,8,3,6,1,7,9],
+                    }
+
+                ]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        gridLines: {
+                            display:true
+                        }
+                    }],
+                    yAxes: [{
+                        gridLines: {
+                            display: true
+                        }
+                    }]
+                }
+            }
+        })
+
+        var controlPie = document.getElementById("myPieChart");
+
+        var graficobar = new Chart(controlPie, {
+            type: 'pie',
+            data: {
+                labels: ["Bomba 1", "Bomba 2", "Bomba 3", "Bomba 4"],
+                datasets: [{
+                        data: [5, 8, 3, 6],
+                        backgroundColor: ["#007bff", "#dc3545", "#ffc107", "#28a745"],
+                }],
+            },
+        });
+
+    </script>
+
+}
+
