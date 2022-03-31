@@ -27,12 +27,12 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
-            if (aspNetUsers == null)
+            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
+            if (aspNetUser == null)
             {
                 return HttpNotFound();
             }
-            return View(aspNetUsers);
+            return View(aspNetUser);
         }
 
         // GET: AspNetUsers/Create
@@ -40,10 +40,8 @@ namespace SBASAWAPP.Controllers
         {
             return View();
         }
-
-        // POST: AspNetUsers/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Activo")] AspNetUsers aspNetUsers)
@@ -54,7 +52,6 @@ namespace SBASAWAPP.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(aspNetUsers);
         }
 
