@@ -2,9 +2,9 @@
 @model SBASAWAPP.Models.ExternalLoginListViewModel
 @using Microsoft.Owin.Security
 @{
-    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
     using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }))
     {
+        var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
         @Html.AntiForgeryToken()
         <div id="socialLoginList">
                 @foreach (AuthenticationDescription p in loginProviders)

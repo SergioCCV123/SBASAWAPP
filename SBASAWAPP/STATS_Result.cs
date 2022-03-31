@@ -10,13 +10,10 @@
 namespace SBASAWAPP
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class C__MigrationHistory
+    public partial class STATS_Result
     {
-        public string MigrationId { get; set; }
-        public string ContextKey { get; set; }
-        public byte[] Model { get; set; }
-        public string ProductVersion { get; set; }
+        public string NAME { get; set; }
+        public Nullable<int> Column1 { get; set; }
     }
 }

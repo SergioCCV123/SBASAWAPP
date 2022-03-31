@@ -58,6 +58,12 @@ namespace SBASAWAPP.Models
         public string ConfirmPassword { get; set; }
     }
 
+    public class ChangeUserNameViewModel
+    {
+        [Display(Name = "New User Name")]
+        public string UserName { get; set; }
+    }
+
     public class AddPhoneNumberViewModel
     {
         [Required]
