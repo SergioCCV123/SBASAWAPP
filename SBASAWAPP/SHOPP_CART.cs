@@ -18,7 +18,7 @@ namespace SBASAWAPP
         public Nullable<int> ID_PRODUCT { get; set; }
         public int QUANTITY { get; set; }
     
-        public virtual AspNetUser AspNetUsers { get; set; }
-        public virtual PRODUCT PRODUCTS { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual PRODUCTS PRODUCTS { get; set; }
     }
 }

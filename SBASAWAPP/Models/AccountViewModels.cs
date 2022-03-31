@@ -109,4 +109,21 @@ namespace SBASAWAPP.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
+    public class UpdateUserProfile
+    {
+        [Required]
+        [Display(Name = "Email")]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [Required]
+        [Display(Name = "Birtdate")]
+        public string BirthDate { get; set; }
+    }
 }

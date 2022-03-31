@@ -12,11 +12,14 @@ namespace SBASAWAPP
     using System;
     using System.Collections.Generic;
     
-    public partial class C__MigrationHistory
+    public partial class HISTORY
     {
-        public string MigrationId { get; set; }
-        public string ContextKey { get; set; }
-        public byte[] Model { get; set; }
-        public string ProductVersion { get; set; }
+        public int IDHISTORY { get; set; }
+        public Nullable<int> IDPRODUCT { get; set; }
+        public string IDUSER { get; set; }
+        public System.DateTime FECHAHISTORY { get; set; }
+    
+        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual PRODUCTS PRODUCTS { get; set; }
     }
 }
