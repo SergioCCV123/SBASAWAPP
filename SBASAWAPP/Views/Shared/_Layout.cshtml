@@ -67,10 +67,12 @@
                             <li>
                                 @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
                             </li>
-                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()"  class="btn btn-primary">Log off</a></li>
 
                         }
                     }
+                    else
+                    {
                     <li class="nav-item active p-1">
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#LoginWindow">
                             Login
@@ -81,6 +83,7 @@
                             Sign Up
                         </button>
                     </li>
+                    }
                 </ul>
             </div>
         </div>
