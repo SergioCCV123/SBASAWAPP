@@ -2,119 +2,124 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using OfficeOpenXml;
 using SBASAWAPP;
-using Syncfusion.XlsIO;
 
 namespace SBASAWAPP.Controllers
 {
-    public class SALESController : Controller
+    public class SHOPP_CARTController : Controller
     {
         private example5_SBASAWAPPEntities db = new example5_SBASAWAPPEntities();
 
-
-        // GET: SALES
+        // GET: SHOPP_CART
         public ActionResult Index()
         {
-            return View(db.SALES.ToList());
+            var sHOPP_CART = db.SHOPP_CART.Include(s => s.AspNetUsers).Include(s => s.PRODUCTS);
+            return View(sHOPP_CART.ToList());
         }
 
-        // GET: SALES/Details/5
+        // GET: SHOPP_CART/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SALES sALES = db.SALES.Find(id);
-            if (sALES == null)
+            SHOPP_CART sHOPP_CART = db.SHOPP_CART.Find(id);
+            if (sHOPP_CART == null)
             {
                 return HttpNotFound();
             }
-            return View(sALES);
+            return View(sHOPP_CART);
         }
 
-        // GET: SALES/Create
+        // GET: SHOPP_CART/Create
         public ActionResult Create()
         {
+            ViewBag.ID_USER = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.ID_PRODUCT = new SelectList(db.PRODUCTS, "ID", "NAME");
             return View();
         }
 
-        // POST: SALES/Create
+        // POST: SHOPP_CART/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CLIENT_NAME,SALE_TOTAL")] SALES sALES)
+        public ActionResult Create([Bind(Include = "ID_USER,ID_PRODUCT,QUANTITY")] SHOPP_CART sHOPP_CART)
         {
             if (ModelState.IsValid)
             {
-                db.SALES.Add(sALES);
+                db.SHOPP_CART.Add(sHOPP_CART);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(sALES);
+            ViewBag.ID_USER = new SelectList(db.AspNetUsers, "Id", "Email", sHOPP_CART.ID_USER);
+            ViewBag.ID_PRODUCT = new SelectList(db.PRODUCTS, "ID", "NAME", sHOPP_CART.ID_PRODUCT);
+            return View(sHOPP_CART);
         }
 
-        // GET: SALES/Edit/5
+        // GET: SHOPP_CART/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SALES sALES = db.SALES.Find(id);
-            if (sALES == null)
+            SHOPP_CART sHOPP_CART = db.SHOPP_CART.Find(id);
+            if (sHOPP_CART == null)
             {
                 return HttpNotFound();
             }
-            return View(sALES);
+            ViewBag.ID_USER = new SelectList(db.AspNetUsers, "Id", "Email", sHOPP_CART.ID_USER);
+            ViewBag.ID_PRODUCT = new SelectList(db.PRODUCTS, "ID", "NAME", sHOPP_CART.ID_PRODUCT);
+            return View(sHOPP_CART);
         }
 
-        // POST: SALES/Edit/5
+        // POST: SHOPP_CART/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CLIENT_NAME,SALE_TOTAL")] SALES sALES)
+        public ActionResult Edit([Bind(Include = "ID_USER,ID_PRODUCT,QUANTITY")] SHOPP_CART sHOPP_CART)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(sALES).State = EntityState.Modified;
+                db.Entry(sHOPP_CART).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(sALES);
+            ViewBag.ID_USER = new SelectList(db.AspNetUsers, "Id", "Email", sHOPP_CART.ID_USER);
+            ViewBag.ID_PRODUCT = new SelectList(db.PRODUCTS, "ID", "NAME", sHOPP_CART.ID_PRODUCT);
+            return View(sHOPP_CART);
         }
 
-        // GET: SALES/Delete/5
+        // GET: SHOPP_CART/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SALES sALES = db.SALES.Find(id);
-            if (sALES == null)
+            SHOPP_CART sHOPP_CART = db.SHOPP_CART.Find(id);
+            if (sHOPP_CART == null)
             {
                 return HttpNotFound();
             }
-            return View(sALES);
+            return View(sHOPP_CART);
         }
 
-        // POST: SALES/Delete/5
+        // POST: SHOPP_CART/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SALES sALES = db.SALES.Find(id);
-            db.SALES.Remove(sALES);
+            SHOPP_CART sHOPP_CART = db.SHOPP_CART.Find(id);
+            db.SHOPP_CART.Remove(sHOPP_CART);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -126,28 +131,6 @@ namespace SBASAWAPP.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        public ActionResult Excel()
-        {
-            var list = new List<SALES>();
-            list = db.SALES.ToList();
-            var stream = new MemoryStream();
-
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            using (var package = new ExcelPackage(stream))
-            {
-                var worksheet = package.Workbook.Worksheets.Add("Sales");
-                worksheet.Cells.LoadFromCollection(list);
-                worksheet.Column(4).Hidden = true;
-                package.Save();
-            }
-
-            stream.Position = 0;
-            string excelName = $"SALES-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}.xlsx";
-
-            return File(stream, "application/octet-stream", excelName);
-
         }
     }
 }

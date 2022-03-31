@@ -244,6 +244,26 @@ namespace SBASAWAPP.Controllers
             return View(model);
         }
 
+        public ActionResult ChangeUsername()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Manage/ChangeUsername
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeUsername(ChangeUserNameViewModel model)
+        {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId().ToString());
+
+            user.UserName = model.UserName;
+
+            var result = await UserManager.UpdateAsync(user);
+
+            return View();
+        }
+
         //
         // GET: /Manage/SetPassword
         public ActionResult SetPassword()

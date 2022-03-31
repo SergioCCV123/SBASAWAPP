@@ -46,12 +46,6 @@ namespace SBASAWAPP.Models
         public string Email { get; set; }
     }
 
-    public class MainViewModel
-    {
-        public LoginViewModel Model2 { get; set; }
-        public RegisterViewModel Model1 { get; set;}
-    }
-
     public class LoginViewModel
     {
         [Required]
@@ -114,5 +108,22 @@ namespace SBASAWAPP.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+    }
+
+    public class UpdateUserProfile
+    {
+        [Required]
+        [Display(Name = "Email")]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [Required]
+        [Display(Name = "Birtdate")]
+        public string BirthDate { get; set; }
     }
 }

@@ -1,0 +1,18 @@
+﻿@model SBASAWAPP.Models.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+
+    @using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }))
+    {
+        @Html.AntiForgeryToken();
+        var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+        foreach (AuthenticationDescription p in loginProviders)
+        {
+            <button type="submit" class="btn btn-outline-dark p-1" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">
+                <i class="fab fa-@p.AuthenticationType.ToLower()"></i>
+                <p>
+                   Crear Cuenta de @p.AuthenticationType
+                </p>
+            </button>
+        }
+    }
+

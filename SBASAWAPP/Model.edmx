@@ -65,6 +65,7 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Activo" Type="bit" />
         </EntityType>
         <EntityType Name="CATEGORIES">
           <Key>
@@ -85,6 +86,15 @@
           <Property Name="NUMPAGO" Type="int" Nullable="false" />
           <Property Name="DESCUENTO" Type="money" />
         </EntityType>
+        <EntityType Name="HISTORY">
+          <Key>
+            <PropertyRef Name="IDHISTORY" />
+          </Key>
+          <Property Name="IDHISTORY" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDPRODUCT" Type="int" />
+          <Property Name="IDUSER" Type="nvarchar" MaxLength="128" />
+          <Property Name="FECHAHISTORY" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="INSTALADOR">
           <Key>
             <PropertyRef Name="IdRol" />
@@ -98,15 +108,15 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NAME" Type="varchar" MaxLength="50" />
+          <Property Name="NAME" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DESCRIPTION" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="PRICE" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="URL" Type="text" />
           <Property Name="CATEGORY" Type="int" />
           <Property Name="ACTIVE" Type="bit" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'example5_SBASAWAPP.dbo.PRODUCTSPS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PRODUCTSPS">
           <Key>
             <PropertyRef Name="ID_SALE" />
@@ -124,6 +134,16 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CLIENT_NAME" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="SALE_TOTAL" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'example5_SBASAWAPP.example5_ADMIN.SHOPP_CART' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SHOPP_CART">
+          <Key>
+            <PropertyRef Name="QUANTITY" />
+          </Key>
+          <Property Name="ID_USER" Type="nvarchar" MaxLength="128" />
+          <Property Name="ID_PRODUCT" Type="int" />
+          <Property Name="QUANTITY" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK__PRODUCTS__CATEGO__4AB81AF0">
           <End Role="CATEGORIES" Type="Self.CATEGORIES" Multiplicity="0..1" />
@@ -158,6 +178,30 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
             </Principal>
             <Dependent Role="PRODUCTSPS">
               <PropertyRef Name="ID_SALE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SHOPP_CAR__ID_PR__6E01572D">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="0..1" />
+          <End Role="SHOPP_CART" Type="Self.SHOPP_CART" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SHOPP_CART">
+              <PropertyRef Name="ID_PRODUCT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SHOPP_CAR__ID_US__6D0D32F4">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="SHOPP_CART" Type="Self.SHOPP_CART" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SHOPP_CART">
+              <PropertyRef Name="ID_USER" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -217,6 +261,31 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_HISTORY_PRODUCTS">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="0..1" />
+          <End Role="HISTORY" Type="Self.HISTORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HISTORY">
+              <PropertyRef Name="IDPRODUCT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HISTORY_USER">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="HISTORY" Type="Self.HISTORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HISTORY">
+              <PropertyRef Name="IDUSER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="STATS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="example5_SBASAWAPPModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -226,6 +295,7 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CATEGORIES" EntityType="Self.CATEGORIES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FACTURA" EntityType="Self.FACTURA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HISTORY" EntityType="Self.HISTORY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INSTALADOR" EntityType="Self.INSTALADOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCTS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SALES" EntityType="Self.SALES" Schema="dbo" store:Type="Tables" />
@@ -235,6 +305,13 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
     [PRODUCTSPS].[ID_PRODUCT] AS [ID_PRODUCT], 
     [PRODUCTSPS].[QUANTITY] AS [QUANTITY]
     FROM [dbo].[PRODUCTSPS] AS [PRODUCTSPS]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SHOPP_CART" EntityType="Self.SHOPP_CART" store:Type="Tables" store:Schema="example5_ADMIN">
+            <DefiningQuery>SELECT 
+    [SHOPP_CART].[ID_USER] AS [ID_USER], 
+    [SHOPP_CART].[ID_PRODUCT] AS [ID_PRODUCT], 
+    [SHOPP_CART].[QUANTITY] AS [QUANTITY]
+    FROM [example5_ADMIN].[SHOPP_CART] AS [SHOPP_CART]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK__PRODUCTS__CATEGO__4AB81AF0" Association="Self.FK__PRODUCTS__CATEGO__4AB81AF0">
             <End Role="CATEGORIES" EntitySet="CATEGORIES" />
@@ -247,6 +324,14 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
           <AssociationSet Name="FK__PRODUCTSP__ID_SA__5AEE82B9" Association="Self.FK__PRODUCTSP__ID_SA__5AEE82B9">
             <End Role="SALES" EntitySet="SALES" />
             <End Role="PRODUCTSPS" EntitySet="PRODUCTSPS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SHOPP_CAR__ID_PR__6E01572D" Association="Self.FK__SHOPP_CAR__ID_PR__6E01572D">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="SHOPP_CART" EntitySet="SHOPP_CART" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SHOPP_CAR__ID_US__6D0D32F4" Association="Self.FK__SHOPP_CAR__ID_US__6D0D32F4">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="SHOPP_CART" EntitySet="SHOPP_CART" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -264,6 +349,14 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_HISTORY_PRODUCTS" Association="Self.FK_HISTORY_PRODUCTS">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="HISTORY" EntitySet="HISTORY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HISTORY_USER" Association="Self.FK_HISTORY_USER">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="HISTORY" EntitySet="HISTORY" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -271,44 +364,59 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
       <Schema Namespace="example5_SBASAWAPPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="example5_SBASAWAPPEntities" annotation:LazyLoadingEnabled="true" >
           <EntitySet Name="C__MigrationHistory" EntityType="example5_SBASAWAPPModel.C__MigrationHistory" />
-          <EntitySet Name="AspNetRoles" EntityType="example5_SBASAWAPPModel.AspNetRole" />
-          <EntitySet Name="AspNetUserClaims" EntityType="example5_SBASAWAPPModel.AspNetUserClaim" />
-          <EntitySet Name="AspNetUserLogins" EntityType="example5_SBASAWAPPModel.AspNetUserLogin" />
-          <EntitySet Name="AspNetUsers" EntityType="example5_SBASAWAPPModel.AspNetUser" />
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="example5_SBASAWAPPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="example5_SBASAWAPPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="example5_SBASAWAPPModel.AspNetUserRoles">
-            <End Role="AspNetRole" EntitySet="AspNetRoles" />
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <EntitySet Name="PRODUCTS" EntityType="example5_SBASAWAPPModel.PRODUCT" />
+          <EntitySet Name="AspNetRoles" EntityType="example5_SBASAWAPPModel.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="example5_SBASAWAPPModel.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="example5_SBASAWAPPModel.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="example5_SBASAWAPPModel.AspNetUsers" />
           <EntitySet Name="CATEGORIES" EntityType="example5_SBASAWAPPModel.CATEGORIES" />
-          <AssociationSet Name="FK__PRODUCTS__CATEGO__4AB81AF0" Association="example5_SBASAWAPPModel.FK__PRODUCTS__CATEGO__4AB81AF0">
-            <End Role="CATEGORIES" EntitySet="CATEGORIES" />
-            <End Role="PRODUCT" EntitySet="PRODUCTS" />
-          </AssociationSet>
+          <EntitySet Name="FACTURA" EntityType="example5_SBASAWAPPModel.FACTURA" />
+          <EntitySet Name="HISTORY" EntityType="example5_SBASAWAPPModel.HISTORY" />
+          <EntitySet Name="INSTALADOR" EntityType="example5_SBASAWAPPModel.INSTALADOR" />
+          <EntitySet Name="PRODUCTS" EntityType="example5_SBASAWAPPModel.PRODUCTS" />
           <EntitySet Name="SALES" EntityType="example5_SBASAWAPPModel.SALES" />
           <EntitySet Name="PRODUCTSPS" EntityType="example5_SBASAWAPPModel.PRODUCTSPS" />
+          <EntitySet Name="SHOPP_CART" EntityType="example5_SBASAWAPPModel.SHOPP_CART" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="example5_SBASAWAPPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="example5_SBASAWAPPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SHOPP_CAR__ID_US__6D0D32F4" Association="example5_SBASAWAPPModel.FK__SHOPP_CAR__ID_US__6D0D32F4">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="SHOPP_CART" EntitySet="SHOPP_CART" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HISTORY_USER" Association="example5_SBASAWAPPModel.FK_HISTORY_USER">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="HISTORY" EntitySet="HISTORY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTS__CATEGO__4AB81AF0" Association="example5_SBASAWAPPModel.FK__PRODUCTS__CATEGO__4AB81AF0">
+            <End Role="CATEGORIES" EntitySet="CATEGORIES" />
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HISTORY_PRODUCTS" Association="example5_SBASAWAPPModel.FK_HISTORY_PRODUCTS">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="HISTORY" EntitySet="HISTORY" />
+          </AssociationSet>
           <AssociationSet Name="FK__PRODUCTSP__ID_PR__5BE2A6F2" Association="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_PR__5BE2A6F2">
-            <End Role="PRODUCT" EntitySet="PRODUCTS" />
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
             <End Role="PRODUCTSPS" EntitySet="PRODUCTSPS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SHOPP_CAR__ID_PR__6E01572D" Association="example5_SBASAWAPPModel.FK__SHOPP_CAR__ID_PR__6E01572D">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="SHOPP_CART" EntitySet="SHOPP_CART" />
           </AssociationSet>
           <AssociationSet Name="FK__PRODUCTSP__ID_SA__5AEE82B9" Association="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_SA__5AEE82B9">
             <End Role="SALES" EntitySet="SALES" />
             <End Role="PRODUCTSPS" EntitySet="PRODUCTSPS" />
           </AssociationSet>
-          <EntitySet Name="INSTALADOR" EntityType="example5_SBASAWAPPModel.INSTALADOR" />
-          <EntitySet Name="FACTURA" EntityType="example5_SBASAWAPPModel.FACTURA" />
-          <AssociationSet Name="FK__FACTURA__IDUSUAR__5EBF139D" Association="example5_SBASAWAPPModel.FK__FACTURA__IDUSUAR__5EBF139D">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="FACTURA" EntitySet="FACTURA" />
+          <AssociationSet Name="AspNetUserRoles" Association="example5_SBASAWAPPModel.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <FunctionImport Name="STATS" ReturnType="Collection(example5_SBASAWAPPModel.STATS_Result)" />
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -320,15 +428,15 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
           <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="AspNetRole">
+        <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="example5_SBASAWAPPModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUsers" Relationship="example5_SBASAWAPPModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="AspNetUserClaim">
+        <EntityType Name="AspNetUserClaims">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -336,9 +444,9 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="example5_SBASAWAPPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUsers" Relationship="example5_SBASAWAPPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="AspNetUserLogin">
+        <EntityType Name="AspNetUserLogins">
           <Key>
             <PropertyRef Name="LoginProvider" />
             <PropertyRef Name="ProviderKey" />
@@ -347,9 +455,9 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
           <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="example5_SBASAWAPPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUsers" Relationship="example5_SBASAWAPPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="AspNetUser">
+        <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -365,55 +473,12 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="example5_SBASAWAPPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="example5_SBASAWAPPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
-          <NavigationProperty Name="AspNetRoles" Relationship="example5_SBASAWAPPModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
-        </EntityType>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Type="example5_SBASAWAPPModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="example5_SBASAWAPPModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserClaim">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Type="example5_SBASAWAPPModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="example5_SBASAWAPPModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogin">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="AspNetUserRoles">
-          <End Type="example5_SBASAWAPPModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
-          <End Type="example5_SBASAWAPPModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
-        </Association>
-        <EntityType Name="PRODUCT">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DESCRIPTION" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="PRICE" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CATEGORY" Type="Int32" />
-          <NavigationProperty Name="CATEGORIES" Relationship="example5_SBASAWAPPModel.FK__PRODUCTS__CATEGO__4AB81AF0" FromRole="PRODUCT" ToRole="CATEGORIES" />
-          <NavigationProperty Name="PRODUCTSPS" Relationship="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_PR__5BE2A6F2" FromRole="PRODUCT" ToRole="PRODUCTSPS" />
-          <Property Name="ACTIVE" Type="Boolean" />
+          <Property Name="Activo" Type="Boolean" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="example5_SBASAWAPPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="example5_SBASAWAPPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="SHOPP_CART" Relationship="example5_SBASAWAPPModel.FK__SHOPP_CAR__ID_US__6D0D32F4" FromRole="AspNetUsers" ToRole="SHOPP_CART" />
+          <NavigationProperty Name="HISTORY" Relationship="example5_SBASAWAPPModel.FK_HISTORY_USER" FromRole="AspNetUsers" ToRole="HISTORY" />
+          <NavigationProperty Name="AspNetRoles" Relationship="example5_SBASAWAPPModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="CATEGORIES">
           <Key>
@@ -421,20 +486,55 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CATEGORY_NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PRODUCTS" Relationship="example5_SBASAWAPPModel.FK__PRODUCTS__CATEGO__4AB81AF0" FromRole="CATEGORIES" ToRole="PRODUCT" />
+          <NavigationProperty Name="PRODUCTS" Relationship="example5_SBASAWAPPModel.FK__PRODUCTS__CATEGO__4AB81AF0" FromRole="CATEGORIES" ToRole="PRODUCTS" />
         </EntityType>
-        <Association Name="FK__PRODUCTS__CATEGO__4AB81AF0">
-          <End Type="example5_SBASAWAPPModel.CATEGORIES" Role="CATEGORIES" Multiplicity="0..1" />
-          <End Type="example5_SBASAWAPPModel.PRODUCT" Role="PRODUCT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CATEGORIES">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="PRODUCT">
-              <PropertyRef Name="CATEGORY" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="FACTURA">
+          <Key>
+            <PropertyRef Name="IDFACTURA" />
+          </Key>
+          <Property Name="IDFACTURA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDUSUARIO" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IVA" Type="Single" Nullable="false" />
+          <Property Name="TOTAL" Type="Single" Nullable="false" />
+          <Property Name="NUMPAGO" Type="Int32" Nullable="false" />
+          <Property Name="DESCUENTO" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="HISTORY">
+          <Key>
+            <PropertyRef Name="IDHISTORY" />
+          </Key>
+          <Property Name="IDHISTORY" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDPRODUCT" Type="Int32" />
+          <Property Name="IDUSER" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FECHAHISTORY" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AspNetUsers" Relationship="example5_SBASAWAPPModel.FK_HISTORY_USER" FromRole="HISTORY" ToRole="AspNetUsers" />
+          <NavigationProperty Name="PRODUCTS" Relationship="example5_SBASAWAPPModel.FK_HISTORY_PRODUCTS" FromRole="HISTORY" ToRole="PRODUCTS" />
+        </EntityType>
+        <EntityType Name="INSTALADOR">
+          <Key>
+            <PropertyRef Name="IdRol" />
+          </Key>
+          <Property Name="IdRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="PRODUCTS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PRICE" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CATEGORY" Type="Int32" />
+          <Property Name="ACTIVE" Type="Boolean" />
+          <NavigationProperty Name="CATEGORIES" Relationship="example5_SBASAWAPPModel.FK__PRODUCTS__CATEGO__4AB81AF0" FromRole="PRODUCTS" ToRole="CATEGORIES" />
+          <NavigationProperty Name="HISTORY" Relationship="example5_SBASAWAPPModel.FK_HISTORY_PRODUCTS" FromRole="PRODUCTS" ToRole="HISTORY" />
+          <NavigationProperty Name="PRODUCTSPS" Relationship="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_PR__5BE2A6F2" FromRole="PRODUCTS" ToRole="PRODUCTSPS" />
+          <NavigationProperty Name="SHOPP_CART" Relationship="example5_SBASAWAPPModel.FK__SHOPP_CAR__ID_PR__6E01572D" FromRole="PRODUCTS" ToRole="SHOPP_CART" />
+        </EntityType>
         <EntityType Name="SALES">
           <Key>
             <PropertyRef Name="ID" />
@@ -453,17 +553,115 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
           <Property Name="ID_SALE" Type="Int32" Nullable="false" />
           <Property Name="ID_PRODUCT" Type="Int32" Nullable="false" />
           <Property Name="QUANTITY" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PRODUCTS" Relationship="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_PR__5BE2A6F2" FromRole="PRODUCTSPS" ToRole="PRODUCT" />
+          <NavigationProperty Name="PRODUCTS" Relationship="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_PR__5BE2A6F2" FromRole="PRODUCTSPS" ToRole="PRODUCTS" />
           <NavigationProperty Name="SALES" Relationship="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_SA__5AEE82B9" FromRole="PRODUCTSPS" ToRole="SALES" />
         </EntityType>
+        <EntityType Name="SHOPP_CART">
+          <Key>
+            <PropertyRef Name="QUANTITY" />
+          </Key>
+          <Property Name="ID_USER" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ID_PRODUCT" Type="Int32" />
+          <Property Name="QUANTITY" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="example5_SBASAWAPPModel.FK__SHOPP_CAR__ID_US__6D0D32F4" FromRole="SHOPP_CART" ToRole="AspNetUsers" />
+          <NavigationProperty Name="PRODUCTS" Relationship="example5_SBASAWAPPModel.FK__SHOPP_CAR__ID_PR__6E01572D" FromRole="SHOPP_CART" ToRole="PRODUCTS" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="example5_SBASAWAPPModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="example5_SBASAWAPPModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="example5_SBASAWAPPModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="example5_SBASAWAPPModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SHOPP_CAR__ID_US__6D0D32F4">
+          <End Type="example5_SBASAWAPPModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="example5_SBASAWAPPModel.SHOPP_CART" Role="SHOPP_CART" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SHOPP_CART">
+              <PropertyRef Name="ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HISTORY_USER">
+          <End Type="example5_SBASAWAPPModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="example5_SBASAWAPPModel.HISTORY" Role="HISTORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HISTORY">
+              <PropertyRef Name="IDUSER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTS__CATEGO__4AB81AF0">
+          <End Type="example5_SBASAWAPPModel.CATEGORIES" Role="CATEGORIES" Multiplicity="0..1" />
+          <End Type="example5_SBASAWAPPModel.PRODUCTS" Role="PRODUCTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTS">
+              <PropertyRef Name="CATEGORY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HISTORY_PRODUCTS">
+          <End Type="example5_SBASAWAPPModel.PRODUCTS" Role="PRODUCTS" Multiplicity="0..1" />
+          <End Type="example5_SBASAWAPPModel.HISTORY" Role="HISTORY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HISTORY">
+              <PropertyRef Name="IDPRODUCT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__PRODUCTSP__ID_PR__5BE2A6F2">
-          <End Type="example5_SBASAWAPPModel.PRODUCT" Role="PRODUCT" Multiplicity="1" />
+          <End Type="example5_SBASAWAPPModel.PRODUCTS" Role="PRODUCTS" Multiplicity="1" />
           <End Type="example5_SBASAWAPPModel.PRODUCTSPS" Role="PRODUCTSPS" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="PRODUCT">
+            <Principal Role="PRODUCTS">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="PRODUCTSPS">
+              <PropertyRef Name="ID_PRODUCT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SHOPP_CAR__ID_PR__6E01572D">
+          <End Type="example5_SBASAWAPPModel.PRODUCTS" Role="PRODUCTS" Multiplicity="0..1" />
+          <End Type="example5_SBASAWAPPModel.SHOPP_CART" Role="SHOPP_CART" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SHOPP_CART">
               <PropertyRef Name="ID_PRODUCT" />
             </Dependent>
           </ReferentialConstraint>
@@ -480,39 +678,15 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="FACTURA">
-          <Key>
-            <PropertyRef Name="IDFACTURA" />
-          </Key>
-          <Property Name="IDFACTURA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDUSUARIO" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IVA" Type="Single" Nullable="false" />
-          <Property Name="TOTAL" Type="Single" Nullable="false" />
-          <Property Name="NUMPAGO" Type="Int32" Nullable="false" />
-          <Property Name="DESCUENTO" Type="Decimal" Precision="19" Scale="4" />
-        </EntityType>
-        <Association Name="FK__FACTURA__IDUSUAR__5EBF139D">
-          <End Type="example5_SBASAWAPPModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
-          <End Type="example5_SBASAWAPPModel.FACTURA" Role="FACTURA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FACTURA">
-              <PropertyRef Name="IDUSUARIO" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="AspNetUserRoles">
+          <End Type="example5_SBASAWAPPModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="example5_SBASAWAPPModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
         </Association>
-        <EntityType Name="INSTALADOR">
-          <Key>
-            <PropertyRef Name="IdRol" />
-          </Key>
-          <Property Name="IdRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
-        </EntityType>
-      </Schema>
+        <ComplexType Name="STATS_Result">
+          <Property Type="String" Name="NAME" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Column1" Nullable="true" />
+        </ComplexType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -529,7 +703,7 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.AspNetRole">
+            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.AspNetRoles">
               <MappingFragment StoreEntitySet="AspNetRoles">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -537,7 +711,7 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.AspNetUserClaim">
+            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.AspNetUserClaims">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
                 <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
                 <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
@@ -547,7 +721,7 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.AspNetUserLogin">
+            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.AspNetUserLogins">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -556,8 +730,9 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.AspNetUser">
+            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
@@ -573,16 +748,48 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="example5_SBASAWAPPModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetUser">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-            <EndProperty Name="AspNetRole">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-          </AssociationSetMapping>
+          <EntitySetMapping Name="CATEGORIES">
+            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.CATEGORIES">
+              <MappingFragment StoreEntitySet="CATEGORIES">
+                <ScalarProperty Name="CATEGORY_NAME" ColumnName="CATEGORY_NAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FACTURA">
+            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.FACTURA">
+              <MappingFragment StoreEntitySet="FACTURA">
+                <ScalarProperty Name="DESCUENTO" ColumnName="DESCUENTO" />
+                <ScalarProperty Name="NUMPAGO" ColumnName="NUMPAGO" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="IVA" ColumnName="IVA" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
+                <ScalarProperty Name="IDFACTURA" ColumnName="IDFACTURA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HISTORY">
+            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.HISTORY">
+              <MappingFragment StoreEntitySet="HISTORY">
+                <ScalarProperty Name="FECHAHISTORY" ColumnName="FECHAHISTORY" />
+                <ScalarProperty Name="IDUSER" ColumnName="IDUSER" />
+                <ScalarProperty Name="IDPRODUCT" ColumnName="IDPRODUCT" />
+                <ScalarProperty Name="IDHISTORY" ColumnName="IDHISTORY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INSTALADOR">
+            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.INSTALADOR">
+              <MappingFragment StoreEntitySet="INSTALADOR">
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PRODUCTS">
-            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.PRODUCT">
+            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.PRODUCTS">
               <MappingFragment StoreEntitySet="PRODUCTS">
                 <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
                 <ScalarProperty Name="CATEGORY" ColumnName="CATEGORY" />
@@ -590,14 +797,6 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
                 <ScalarProperty Name="PRICE" ColumnName="PRICE" />
                 <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CATEGORIES">
-            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.CATEGORIES">
-              <MappingFragment StoreEntitySet="CATEGORIES">
-                <ScalarProperty Name="CATEGORY_NAME" ColumnName="CATEGORY_NAME" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -620,37 +819,31 @@ advertencia 6002: La tabla o vista 'example5_SBASAWAPP.dbo.PRODUCTSPS' no tiene 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="INSTALADOR">
-            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.INSTALADOR">
-              <MappingFragment StoreEntitySet="INSTALADOR">
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+          <EntitySetMapping Name="SHOPP_CART">
+            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.SHOPP_CART">
+              <MappingFragment StoreEntitySet="SHOPP_CART">
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="ID_PRODUCT" ColumnName="ID_PRODUCT" />
+                <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FACTURA">
-            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.FACTURA">
-              <MappingFragment StoreEntitySet="FACTURA">
-                <ScalarProperty Name="DESCUENTO" ColumnName="DESCUENTO" />
-                <ScalarProperty Name="NUMPAGO" ColumnName="NUMPAGO" />
-                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
-                <ScalarProperty Name="IVA" ColumnName="IVA" />
-                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-                <ScalarProperty Name="IDUSUARIO" ColumnName="IDUSUARIO" />
-                <ScalarProperty Name="IDFACTURA" ColumnName="IDFACTURA" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="INSTALADOR">
-            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.INSTALADOR">
-              <MappingFragment StoreEntitySet="INSTALADOR">
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="example5_SBASAWAPPModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="STATS" FunctionName="example5_SBASAWAPPModel.Store.STATS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="example5_SBASAWAPPModel.STATS_Result">
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
