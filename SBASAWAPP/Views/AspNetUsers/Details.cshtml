@@ -34,8 +34,16 @@
             @Html.DisplayFor(model => model.UserName)
         </dd>
 
+        <dt>
+            @Html.DisplayName("Bloqueo")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LockoutEnabled)
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Volver", "Index")
 </p>
