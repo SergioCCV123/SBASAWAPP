@@ -217,9 +217,13 @@
     <Compile Include="CATEGORIES.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="CONTACTO.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AspNetUsersController.cs" />
+    <Compile Include="Controllers\CONTACTOController.cs" />
     <Compile Include="Controllers\FACTURAController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\INSTALADORController.cs" />
@@ -453,6 +457,11 @@
     <Content Include="Views\AspNetUsers\Details.cshtml" />
     <Content Include="Views\AspNetUsers\Edit.cshtml" />
     <Content Include="Views\AspNetUsers\Index.cshtml" />
+    <Content Include="Views\CONTACTO\Create.cshtml" />
+    <Content Include="Views\CONTACTO\Delete.cshtml" />
+    <Content Include="Views\CONTACTO\Details.cshtml" />
+    <Content Include="Views\CONTACTO\Edit.cshtml" />
+    <Content Include="Views\CONTACTO\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

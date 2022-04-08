@@ -12,11 +12,13 @@ namespace SBASAWAPP
     using System;
     using System.Collections.Generic;
     
-    public partial class INSTALADOR
+    public partial class CONTACTO
     {
-        public int IdRol { get; set; }
-        public string Nombre { get; set; }
-        public Nullable<System.DateTime> FechaRegistro { get; set; }
-        public string PROVINCIA { get; set; }
+        public int IDCONTACTO { get; set; }
+        public string NOMBRE { get; set; }
+        public string TELEFONO { get; set; }
+        public string CORREO { get; set; }
+        public string MENSAJE { get; set; }
+        public Nullable<System.DateTime> FECHA { get; set; }
     }
 }

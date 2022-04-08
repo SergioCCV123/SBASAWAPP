@@ -28,6 +28,7 @@
         <AssociationConnector Association="example5_SBASAWAPPModel.FK__SHOPP_CAR__ID_PR__6E01572D" />
         <AssociationConnector Association="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_SA__5AEE82B9" />
         <AssociationConnector Association="example5_SBASAWAPPModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.CONTACTO" Width="1.5" PointX="1" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
