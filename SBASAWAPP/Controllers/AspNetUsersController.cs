@@ -27,7 +27,7 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
+            AspNetUsers aspNetUser = db.AspNetUsers.Find(id);
             if (aspNetUser == null)
             {
                 return HttpNotFound();
