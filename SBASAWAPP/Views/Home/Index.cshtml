@@ -257,46 +257,13 @@
                 ventas@bombasarcorsa.com
             </p>
         </div>
-
-        <div class="col-6">
+        @using (Html.BeginForm("Create", "CONTACTO", FormMethod.Post, new { @class = "col-6" }))
+        {
+            @Html.AntiForgeryToken()
             <div class="card" style="width:100%; background-color:#3DA9FC; border-radius:21px!important;">
                 <div class="card-body">
                     <h5 class="card-title text-center " style="color:#094067; font-family: 'Open Sans', sans-serif;">Contactenos</h5>
-                    <form action="/" method="post">
-                        <div class="mb-3">
-                            <label for="inputNombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombreU" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="inputTelefono" class="form-label">Telefono</label>
-                            <input type="text" class="form-control" id="telefonoU" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="inputCorreo" class="form-label">Correo Electronico</label>
-                            <input type="email" class="form-control" id="correoU" aria-describedby="emailHelp" />
-                            <div id="emailHelp" class="form-text">
-                                Este correo Electronico nunca sera compartido
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="inputMensaje" class="form-label">Mensaje</label>
-                            <textarea class="form-control" id="taMensaje" rows="5"></textarea>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <div class="col-6">
-        <div class="card" style="width:100%; background-color:#3DA9FC; border-radius:21px!important;">
-            <div class="card-body">
-                <h5 class="card-title text-center " style="color:#094067; font-family: 'Open Sans', sans-serif;">Contactenos</h5>
-                <form action="/" method="post">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="mb-3">
                         <label for="inputNombre" class="form-label">Nombre</label>
@@ -330,9 +297,8 @@
                             <input type="submit" value="Enviar" class="btn btn-primary" />
                         </div>
                     </div>
-
-                </form>
+                </div>
             </div>
-        </div>
+        }
     </div>
-}
+</div>
