@@ -1,0 +1,46 @@
+﻿@model IEnumerable<SBASAWAPP.HISTORY>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FECHAHISTORY)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PRODUCTS.NAME)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FECHAHISTORY)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRODUCTS.NAME)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDHISTORY }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDHISTORY }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDHISTORY })
+        </td>
+    </tr>
+}
+
+</table>

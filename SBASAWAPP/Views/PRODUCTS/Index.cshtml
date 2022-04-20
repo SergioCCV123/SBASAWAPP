@@ -1,12 +1,10 @@
-﻿@model IEnumerable<SBASAWAPP.PRODUCT>
+﻿@model IEnumerable<SBASAWAPP.PRODUCTS>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
 }
-
-<h2>Index</h2>
 
 @if (User.IsInRole("ADMIN"))
 {
@@ -19,7 +17,9 @@
 
     @{
         <p>Categoria: @Html.DropDownList("ListadoCategorias", items, "Seleccione una categoria", new { @class = "form-control" })</p>
+        <p><input type="submit" value="Elegir" /></p>
     }
+
 
 
     @foreach (var item in Model)
@@ -39,14 +39,20 @@
                                 <img src="@item.URL">
                                 <h3>@item.NAME</h3>
                                 <p>Colones: @item.PRICE</p>
+
+                                <a href="@Url.Action("Create", "HISTORY", new { id = item.ID })" class="btn btn-primary">Comprar</a>
+
                                 @if (User.IsInRole("ADMIN"))
                                 {
-                                <p>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                                </p>
+                                    <p>
+                                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                    </p>
 
                                 }
+                                <p>
+                                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -58,3 +64,4 @@
     }
 
 </table>
+
