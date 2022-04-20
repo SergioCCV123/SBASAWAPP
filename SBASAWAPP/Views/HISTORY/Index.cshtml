@@ -5,11 +5,12 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if (User.IsInRole("ADMIN")) 
+{ 
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
 <table class="table">
     <tr>
         <th>
@@ -24,23 +25,34 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FECHAHISTORY)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PRODUCTS.NAME)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IDHISTORY }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IDHISTORY }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IDHISTORY })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        if (User.Identity.Name == item.AspNetUsers.Email)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FECHAHISTORY)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PRODUCTS.NAME)
+                </td>
+                <td>
+                    @if (User.IsInRole("ADMIN"))
+                    {
+                        <p>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.IDHISTORY }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.IDHISTORY })
+                        </p>
+                    }
+                    <p>
+                        @Html.ActionLink("Details", "Details", new { id = item.IDHISTORY })
+                    </p>
+                </td>
+            </tr>
+        }
+    }
 
 </table>

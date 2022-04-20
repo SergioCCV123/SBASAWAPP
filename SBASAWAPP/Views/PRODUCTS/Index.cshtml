@@ -13,6 +13,10 @@
     </p>
 }
 
+<div>
+    <p>@Html.ActionLink("Historial de compras", "Index", "HISTORY")</p>
+</div>
+
 <table class="table">
 
     @{
@@ -44,10 +48,10 @@
 
                                 @if (User.IsInRole("ADMIN"))
                                 {
-                                    <p>
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                                    </p>
+                            <p>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID }) |
+                            </p>
 
                                 }
                                 <p>
