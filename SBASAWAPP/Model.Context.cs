@@ -40,6 +40,7 @@ namespace SBASAWAPP
         public virtual DbSet<SALES> SALES { get; set; }
         public virtual DbSet<PRODUCTSPS> PRODUCTSPS { get; set; }
         public virtual DbSet<SHOPP_CART> SHOPP_CART { get; set; }
+        public virtual DbSet<CONTACTO> CONTACTO { get; set; }
     
         public virtual ObjectResult<STATS_Result> STATS()
         {

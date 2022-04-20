@@ -32,6 +32,7 @@
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.INSTALADOR" Width="1.5" PointX="7.375" PointY="0.75" />
         </Diagram>
         <AssociationConnector Association="example5_SBASAWAPPModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.CONTACTO" Width="1.5" PointX="1" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -74,6 +74,17 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CATEGORY_NAME" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="CONTACTO">
+          <Key>
+            <PropertyRef Name="IDCONTACTO" />
+          </Key>
+          <Property Name="IDCONTACTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="TELEFONO" Type="varchar" MaxLength="30" />
+          <Property Name="CORREO" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MENSAJE" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="FECHA" Type="datetime" />
+        </EntityType>
         <EntityType Name="FACTURA">
           <Key>
             <PropertyRef Name="IDFACTURA" />
@@ -102,6 +113,7 @@
           <Property Name="IdRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="60" />
           <Property Name="FechaRegistro" Type="datetime" />
+          <Property Name="PROVINCIA" Type="varchar" MaxLength="60" />
         </EntityType>
         <EntityType Name="PRODUCTS">
           <Key>
@@ -294,6 +306,7 @@ warning 6002: The table/view 'example5_SBASAWAPP.example5_ADMIN.SHOPP_CART' does
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CATEGORIES" EntityType="Self.CATEGORIES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CONTACTO" EntityType="Self.CONTACTO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FACTURA" EntityType="Self.FACTURA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HISTORY" EntityType="Self.HISTORY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INSTALADOR" EntityType="Self.INSTALADOR" Schema="dbo" store:Type="Tables" />
@@ -417,6 +430,7 @@ warning 6002: The table/view 'example5_SBASAWAPP.example5_ADMIN.SHOPP_CART' does
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <FunctionImport Name="STATS" ReturnType="Collection(example5_SBASAWAPPModel.STATS_Result)" />
+          <EntitySet Name="CONTACTO" EntityType="example5_SBASAWAPPModel.CONTACTO" />
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
@@ -518,6 +532,7 @@ warning 6002: The table/view 'example5_SBASAWAPP.example5_ADMIN.SHOPP_CART' does
           <Property Name="IdRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <Property Name="PROVINCIA" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PRODUCTS">
           <Key>
@@ -686,6 +701,17 @@ warning 6002: The table/view 'example5_SBASAWAPP.example5_ADMIN.SHOPP_CART' does
           <Property Type="String" Name="NAME" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="Column1" Nullable="true" />
         </ComplexType>
+        <EntityType Name="CONTACTO">
+          <Key>
+            <PropertyRef Name="IDCONTACTO" />
+          </Key>
+          <Property Name="IDCONTACTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="CORREO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MENSAJE" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -782,6 +808,7 @@ warning 6002: The table/view 'example5_SBASAWAPP.example5_ADMIN.SHOPP_CART' does
           <EntitySetMapping Name="INSTALADOR">
             <EntityTypeMapping TypeName="example5_SBASAWAPPModel.INSTALADOR">
               <MappingFragment StoreEntitySet="INSTALADOR">
+                <ScalarProperty Name="PROVINCIA" ColumnName="PROVINCIA" />
                 <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="IdRol" ColumnName="IdRol" />
@@ -844,6 +871,18 @@ warning 6002: The table/view 'example5_SBASAWAPP.example5_ADMIN.SHOPP_CART' does
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="CONTACTO">
+            <EntityTypeMapping TypeName="example5_SBASAWAPPModel.CONTACTO">
+              <MappingFragment StoreEntitySet="CONTACTO">
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="MENSAJE" ColumnName="MENSAJE" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="IDCONTACTO" ColumnName="IDCONTACTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
