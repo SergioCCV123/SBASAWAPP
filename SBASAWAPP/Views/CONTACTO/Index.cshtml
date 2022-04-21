@@ -5,27 +5,49 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+
 <h2>Consultas</h2>
+
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.NOMBRE)
+            @Html.DisplayName("Nombre")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TELEFONO)
+            @Html.DisplayName("Telefono")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CORREO)
+            @Html.DisplayName("Correo")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MENSAJE)
+            @Html.DisplayName("Mensa")
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FECHA)
-        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.FECHA)
+            </th>*@
         <th></th>
     </tr>
+    @foreach (var item in Model)
+    {
+        if (User.IsInRole("ADMIN"))
+        {
+            Layout = "~/Views/Shared/_AdminLayout.cshtml";
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TELEFONO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CORREO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MENSAJE)
+                </td>
+               
+                <td>
 
 @foreach (var item in Model) {
     <tr>
