@@ -5,8 +5,6 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Edit</h2>
-
 
 @using (Html.BeginForm())
 {
@@ -19,7 +17,7 @@
         @Html.HiddenFor(model => model.IDHISTORY)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IDPRODUCT, "IDPRODUCT", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Id producto", "IDPRODUCT", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("IDPRODUCT", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.IDPRODUCT, "", new { @class = "text-danger" })
@@ -27,7 +25,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IDUSER, "IDUSER", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Id usuario", "IDUSER", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("IDUSER", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.IDUSER, "", new { @class = "text-danger" })
@@ -35,7 +33,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FECHAHISTORY, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.Label("Fecha", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FECHAHISTORY, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FECHAHISTORY, "", new { @class = "text-danger" })
@@ -51,7 +49,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Volver a la lista", "Index")
 </div>
 
 @section Scripts {

@@ -2,32 +2,55 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @if (User.IsInRole("ADMIN")) 
 { 
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Crear nuevo", "Create")
     </p>
 }
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FECHAHISTORY)
+            @Html.DisplayName("Fecha")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+            @Html.DisplayName("Correo")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PRODUCTS.NAME)
+            @Html.DisplayName("Nombre")
         </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        if (User.Identity.Name == item.AspNetUsers.Email)
+        if (User.IsInRole("ADMIN"))
+        {
+            Layout = "~/Views/Shared/_AdminLayout.cshtml";
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FECHAHISTORY)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PRODUCTS.NAME)
+                </td>
+                <td>
+                        <p>
+                            @Html.ActionLink("Editar", "Edit", new { id = item.IDHISTORY }) |
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.IDHISTORY })
+                       
+                        @Html.ActionLink("Detalles", "Details", new { id = item.IDHISTORY })
+                    </p>
+                </td>
+            </tr>
+        }
+        else if (User.Identity.Name == item.AspNetUsers.Email)
         {
             <tr>
                 <td>
@@ -40,15 +63,8 @@
                     @Html.DisplayFor(modelItem => item.PRODUCTS.NAME)
                 </td>
                 <td>
-                    @if (User.IsInRole("ADMIN"))
-                    {
-                        <p>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.IDHISTORY }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.IDHISTORY })
-                        </p>
-                    }
                     <p>
-                        @Html.ActionLink("Details", "Details", new { id = item.IDHISTORY })
+                        @Html.ActionLink("Detalles", "Details", new { id = item.IDHISTORY })
                     </p>
                 </td>
             </tr>

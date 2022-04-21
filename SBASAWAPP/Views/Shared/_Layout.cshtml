@@ -57,6 +57,9 @@
                     <li class="nav-item active p-1">
                         <a href="@Url.Action("Cart", "Home")" class="nav-link navTitles"><i class="fas fa-shopping-cart" style="color: #094067; "></i></a>
                     </li>
+                    <li class="nav-item active p-1">
+                        <a href="@Url.Action("Index", "HISTORY")" class="nav-link navTitles"><i class="fas fa-history" style="color: #094067; "></i></a>
+                    </li>
                     @if (Request.IsAuthenticated)
                     {
                         using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -73,16 +76,16 @@
                     }
                     else
                     {
-                    <li class="nav-item active p-1">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#LoginWindow">
-                            Iniciar sesión
-                        </button>
-                    </li>
-                    <li class="nav-item active p-1">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SignUpWindow">
-                            Registrarse
-                        </button>
-                    </li>
+                        <li class="nav-item active p-1">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#LoginWindow">
+                                Iniciar sesión
+                            </button>
+                        </li>
+                        <li class="nav-item active p-1">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SignUpWindow">
+                                Registrarse
+                            </button>
+                        </li>
                     }
                 </ul>
             </div>

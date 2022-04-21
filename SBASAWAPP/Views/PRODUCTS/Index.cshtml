@@ -2,20 +2,20 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
 }
 
 @if (User.IsInRole("ADMIN"))
 {
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Crear nuevo", "Create")
     </p>
 }
 
-<div>
+@*<div>
     <p>@Html.ActionLink("Historial de compras", "Index", "HISTORY")</p>
-</div>
+</div>*@
 
 <table class="table">
 
@@ -34,34 +34,65 @@
 
         if (item.ACTIVE == true)
         {
+            if (User.IsInRole("ADMIN"))
+            {
+                Layout = "~/Views/Shared/_AdminLayout.cshtml";
 
-            <div class="menu">
-                <div class="products">
-                    <div class="row center-xs">
-                        <div class="col-xs-10 col-sm-6 col-md-4">
-                            <div class="card">
-                                <img src="@item.URL">
-                                <h3>@item.NAME</h3>
-                                <p>Colones: @item.PRICE</p>
+                <div class="menu">
+                    <div class="products">
+                        <div class="row center-xs">
+                            <div class="col-xs-10 col-sm-6 col-md-4">
+                                <div class="card">
+                                    <img src="@item.URL">
+                                    <h3>@item.NAME</h3>
+                                    <p>Colones: @item.PRICE</p>
 
-                                <a href="@Url.Action("Create", "HISTORY", new { id = item.ID })" class="btn btn-primary">Comprar</a>
+                                    <a href="@Url.Action("Create", "HISTORY", new { id = item.ID })" class="btn btn-primary">Comprar</a>
 
-                                @if (User.IsInRole("ADMIN"))
-                                {
-                            <p>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ID }) |
-                            </p>
 
-                                }
-                                <p>
-                                    @Html.ActionLink("Details", "Details", new { id = item.ID })
-                                </p>
+                                    <p>
+                                        @Html.ActionLink("Editar", "Edit", new { id = item.ID }) |
+                                        @Html.ActionLink("Elimnar", "Delete", new { id = item.ID }) |
+                                        @Html.ActionLink("Detalles", "Details", new { id = item.ID })
+                                    </p>
+
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
+            else {
+                <div class="menu">
+                    <div class="products">
+                        <div class="row center-xs">
+                            <div class="col-xs-10 col-sm-6 col-md-4">
+                                <div class="card">
+                                    <img src="@item.URL">
+                                    <h3>@item.NAME</h3>
+                                    <p>Colones: @item.PRICE</p>
+
+                                    <a href="@Url.Action("Create", "HISTORY", new { id = item.ID })" class="btn btn-primary">Comprar</a>
+
+                                    @if (User.IsInRole("ADMIN"))
+                                    {
+                                        <p>
+                                            @Html.ActionLink("Editar", "Edit", new { id = item.ID }) |
+                                            @Html.ActionLink("Eliminar", "Delete", new { id = item.ID }) |
+                                        </p>
+
+                                    }
+                                    <p>
+                                        @Html.ActionLink("Detalles", "Details", new { id = item.ID })
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
 
         }
         //}
