@@ -418,7 +418,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Admin\index.cshtml" />
-    <Content Include="Views\PRODUCT\index.cshtml" />
+    <Content Include="Views\PRODUCT\Index.cshtml" />
     <Content Include="Views\SALES\Create.cshtml" />
     <Content Include="Views\SALES\Delete.cshtml" />
     <Content Include="Views\SALES\Details.cshtml" />
