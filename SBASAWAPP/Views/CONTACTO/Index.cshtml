@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 @if (User.IsInRole("")) 
@@ -30,7 +31,6 @@
             </th>*@
         <th></th>
     </tr>
-
     @foreach (var item in Model)
     {
         if (User.IsInRole("ADMIN"))
@@ -83,5 +83,4 @@
             </tr>
         }
     }
-
 </table>
