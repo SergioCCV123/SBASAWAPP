@@ -4,14 +4,12 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
 <div>
     <h4>CONTACTO</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.NOMBRE)
+            @Html.DisplayName("Nombre")
         </dt>
 
         <dd>
@@ -19,7 +17,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TELEFONO)
+            @Html.DisplayName("Telefono")
         </dt>
 
         <dd>
@@ -27,7 +25,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CORREO)
+            @Html.DisplayName("Correo")
         </dt>
 
         <dd>
@@ -35,7 +33,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MENSAJE)
+            @Html.DisplayName("Mensaje")
         </dt>
 
         <dd>
@@ -43,7 +41,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.FECHA)
+            @Html.DisplayName("Fecha")
         </dt>
 
         <dd>
@@ -53,6 +51,10 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IDCONTACTO }) |
-    @Html.ActionLink("Back to List", "Index")
+    @if (User.IsInRole("ADMIN"))
+    {
+        @Html.ActionLink("Editar", "Edit", new { id = Model.IDCONTACTO }) 
+    }
+
+    @Html.ActionLink("Volver a la lista", "Index")
 </p>
