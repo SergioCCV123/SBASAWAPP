@@ -27,9 +27,7 @@
         <AssociationConnector Association="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_PR__5BE2A6F2" />
         <AssociationConnector Association="example5_SBASAWAPPModel.FK__SHOPP_CAR__ID_PR__6E01572D" />
         <AssociationConnector Association="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_SA__5AEE82B9" />
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.FACTURA" Width="1.5" PointX="5.25" PointY="13.125" />
         <AssociationConnector Association="example5_SBASAWAPPModel.FK__FACTURA__IDUSUAR__5EBF139D" />
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.INSTALADOR" Width="1.5" PointX="7.375" PointY="0.75" />
         </Diagram>
         <AssociationConnector Association="example5_SBASAWAPPModel.AspNetUserRoles" />
         <EntityTypeShape EntityType="example5_SBASAWAPPModel.CONTACTO" Width="1.5" PointX="1" PointY="10.75" />

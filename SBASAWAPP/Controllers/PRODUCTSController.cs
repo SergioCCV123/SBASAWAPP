@@ -10,7 +10,7 @@ using SBASAWAPP;
 
 namespace SBASAWAPP.Controllers
 {
-    public class PRODUCTController : Controller
+    public class PRODUCTSController : Controller
     {
         private example5_SBASAWAPPEntities db = new example5_SBASAWAPPEntities();
 
@@ -150,5 +150,9 @@ namespace SBASAWAPP.Controllers
             }
             base.Dispose(disposing);
         }
+
+
+
+
     }
 }
