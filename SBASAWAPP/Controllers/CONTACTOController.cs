@@ -52,7 +52,7 @@ namespace SBASAWAPP.Controllers
             {
                 db.CONTACTO.Add(cONTACTO);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("../");
             }
 
             return View(cONTACTO);

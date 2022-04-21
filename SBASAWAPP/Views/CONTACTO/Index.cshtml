@@ -1,9 +1,11 @@
 ﻿@model IEnumerable<SBASAWAPP.CONTACTO>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Consultas";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+
+<h2>Consultas</h2>
 
 <table class="table">
     <tr>
@@ -43,9 +45,9 @@
             @Html.DisplayFor(modelItem => item.FECHA)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IDCONTACTO }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IDCONTACTO }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IDCONTACTO })
+            @Html.ActionLink("Editar", "Edit", new { id=item.IDCONTACTO }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.IDCONTACTO }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.IDCONTACTO })
         </td>
     </tr>
 }

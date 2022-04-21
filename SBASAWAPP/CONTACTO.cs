@@ -11,14 +11,32 @@ namespace SBASAWAPP
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class CONTACTO
     {
         public int IDCONTACTO { get; set; }
+
+        [Required]
+        [Display(Name = "Nombre")]
+
         public string NOMBRE { get; set; }
+
+        [Required]
+        [Phone]
+        [Display(Name = "Telefono")]
         public string TELEFONO { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Correo")]
         public string CORREO { get; set; }
+
+        [Required]
+        [Display(Name = "Mensaje")]
         public string MENSAJE { get; set; }
+
+        [Display(Name = "Fecha")]
         public Nullable<System.DateTime> FECHA { get; set; }
     }
 }
