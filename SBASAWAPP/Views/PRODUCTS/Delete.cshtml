@@ -1,18 +1,18 @@
-﻿@model SBASAWAPP.PRODUCT
+﻿@model SBASAWAPP.PRODUCTS
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Details</h2>
 
+<h3>Está seguro de eliminar esto?</h3>
 <div>
-    <h4>PRODUCTS</h4>
+    <h4>PRODUCTOS</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.NAME)
+            @Html.DisplayName("Nombre")
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DESCRIPTION)
+            @Html.DisplayName("Descripcion")
         </dt>
 
         <dd>
@@ -28,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.PRICE)
+            @Html.DisplayName("Precio")
         </dt>
 
         <dd>
@@ -36,7 +36,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.URL)
+            @Html.DisplayName("URL")
         </dt>
 
         <dd>
@@ -44,7 +44,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ACTIVE)
+            @Html.DisplayName("Activo")
         </dt>
 
         <dd>
@@ -52,7 +52,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CATEGORIES.CATEGORY_NAME)
+            @Html.DisplayName("Categoria")
         </dt>
 
         <dd>
@@ -60,8 +60,13 @@
         </dd>
 
     </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Volver a la lista", "Index")
+        </div>
+    }
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
