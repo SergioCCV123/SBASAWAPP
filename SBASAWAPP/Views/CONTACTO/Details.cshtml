@@ -1,9 +1,11 @@
 ﻿@model SBASAWAPP.CONTACTO
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalles";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+
+<h2>Detalles</h2>
 
 <div>
     <h4>CONTACTO</h4>
@@ -54,7 +56,7 @@
 <p>
     @if (User.IsInRole("ADMIN"))
     {
-        @Html.ActionLink("Editar", "Edit", new { id = Model.IDCONTACTO }) 
+        @Html.ActionLink("Editar", "Edit", new { id = Model.IDCONTACTO })
     }
 
     @Html.ActionLink("Volver a la lista", "Index")

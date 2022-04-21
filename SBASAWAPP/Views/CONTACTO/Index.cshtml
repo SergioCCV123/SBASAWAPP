@@ -1,16 +1,13 @@
 ﻿@model IEnumerable<SBASAWAPP.CONTACTO>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Consultas";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-@if (User.IsInRole("")) 
-{ 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-}
+
+<h2>Consultas</h2>
+
 
 <table class="table">
     <tr>
@@ -52,35 +49,28 @@
                
                 <td>
 
-                        @Html.ActionLink("Editar", "Edit", new { id = item.IDCONTACTO })
-                    
-
-                    @Html.ActionLink("Detalles", "Details", new { id = item.IDCONTACTO })
-                </td>
-            </tr>
-        }
-        else if (User.Identity.Name == item.CORREO)
-        {
-
-
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NOMBRE)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TELEFONO)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CORREO)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MENSAJE)
-                </td>
-                <td>
-
-                    @Html.ActionLink("Detalles", "Details", new { id = item.IDCONTACTO })
-                </td>
-            </tr>
-        }
-    }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMBRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TELEFONO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CORREO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MENSAJE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FECHA)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.IDCONTACTO }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.IDCONTACTO }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.IDCONTACTO })
+        </td>
+    </tr>
+}
 </table>

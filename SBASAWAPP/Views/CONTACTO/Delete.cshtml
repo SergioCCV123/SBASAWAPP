@@ -1,11 +1,14 @@
 ﻿@model SBASAWAPP.CONTACTO
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Eliminar";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+
+<h2>Eliminar</h2>
 <h3>Está seguro de querer eliminar esto?</h3>
+
 <div>
     <h4>CONTACTO</h4>
     <hr />
@@ -56,8 +59,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Volver a la lista", "Index")
+            <input type="submit" value="Eliminar" class="btn btn-primary" /> |
+            @Html.ActionLink("Volver", "Index")
         </div>
     }
 </div>
