@@ -1,0 +1,86 @@
+﻿@model IEnumerable<SBASAWAPP.CONTACTO>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@if (User.IsInRole("")) 
+{ 
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Nombre")
+        </th>
+        <th>
+            @Html.DisplayName("Telefono")
+        </th>
+        <th>
+            @Html.DisplayName("Correo")
+        </th>
+        <th>
+            @Html.DisplayName("Mensa")
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.FECHA)
+            </th>*@
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        if (User.IsInRole("ADMIN"))
+        {
+            Layout = "~/Views/Shared/_AdminLayout.cshtml";
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TELEFONO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CORREO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MENSAJE)
+                </td>
+               
+                <td>
+
+                        @Html.ActionLink("Editar", "Edit", new { id = item.IDCONTACTO })
+                    
+
+                    @Html.ActionLink("Detalles", "Details", new { id = item.IDCONTACTO })
+                </td>
+            </tr>
+        }
+        else if (User.Identity.Name == item.CORREO)
+        {
+
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TELEFONO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CORREO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MENSAJE)
+                </td>
+                <td>
+
+                    @Html.ActionLink("Detalles", "Details", new { id = item.IDCONTACTO })
+                </td>
+            </tr>
+        }
+    }
+</table>

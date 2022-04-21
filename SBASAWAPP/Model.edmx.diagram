@@ -30,6 +30,7 @@
         <AssociationConnector Association="example5_SBASAWAPPModel.FK__FACTURA__IDUSUAR__5EBF139D" />
         </Diagram>
         <AssociationConnector Association="example5_SBASAWAPPModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.CONTACTO" Width="1.5" PointX="1" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

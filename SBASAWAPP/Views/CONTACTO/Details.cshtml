@@ -1,0 +1,61 @@
+﻿@model SBASAWAPP.CONTACTO
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div>
+    <h4>CONTACTO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Nombre")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Telefono")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TELEFONO)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Correo")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CORREO)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Mensaje")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MENSAJE)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Fecha")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @if (User.IsInRole("ADMIN"))
+    {
+        @Html.ActionLink("Editar", "Edit", new { id = Model.IDCONTACTO }) 
+    }
+
+    @Html.ActionLink("Volver a la lista", "Index")
+</p>
