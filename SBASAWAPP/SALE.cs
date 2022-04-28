@@ -11,7 +11,8 @@ namespace SBASAWAPP
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class SALE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,7 +22,13 @@ namespace SBASAWAPP
         }
     
         public int ID { get; set; }
+
+        [Required]
+        [Display(Name = "Nombre Cliente")]
         public string CLIENT_NAME { get; set; }
+
+        [Required]
+        [Display(Name = "Venta Total")]
         public decimal SALE_TOTAL { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
