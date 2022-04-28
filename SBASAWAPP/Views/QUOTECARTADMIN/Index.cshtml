@@ -5,28 +5,26 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
-
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.QUANTITY)
+            @Html.DisplayName("Cantidad")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RESULTADO)
+            @Html.DisplayName("Resultado")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ACTIVO)
+            @Html.DisplayName("Activo")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+            @Html.DisplayName("Correo electrónico")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PRODUCT.NAME)
+            @Html.DisplayName("Producto")
         </th>
 
         <th>
-            @Html.DisplayNameFor(model => model.FECHA)
+            @Html.DisplayName("Fecha")
         </th>
         <th></th>
     </tr>
@@ -52,9 +50,9 @@
             @Html.DisplayFor(modelItem => item.FECHA)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Editar", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.ID })
         </td>
     </tr>
 }

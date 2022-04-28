@@ -13,22 +13,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.NAME)
+            @Html.DisplayName("Nombre")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DESCRIPTION)
+            @Html.DisplayName("Descrición")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PRICE)
+            @Html.DisplayName("Precio")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.URL)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ACTIVE)
+            @Html.DisplayName("Activo")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CATEGORy1.CATEGORY_NAME)
+            @Html.DisplayName("Categoria")
         </th>
         <th></th>
     </tr>
@@ -54,9 +54,9 @@
             @Html.DisplayFor(modelItem => item.CATEGORy1.CATEGORY_NAME)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Editar", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.ID })
         </td>
     </tr>
 }

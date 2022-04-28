@@ -8,19 +8,18 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear nuevo", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.MESSAGE)
+            @Html.DisplayName("Mensaje")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FECHA)
+            @Html.DisplayName("Fecha")
         </th>
         <th></th>
     </tr>
-
     @foreach (var item in Model)
     {
         if (item.IDUSER.Equals(User.Identity.GetUserId()))

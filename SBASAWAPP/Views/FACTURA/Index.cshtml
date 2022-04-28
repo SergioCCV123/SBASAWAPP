@@ -8,7 +8,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear nuevo", "Create")
 </p>
 <section id="main">
     <div class="inner">
@@ -22,22 +22,22 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.IDUSUARIO)
+                                @Html.DisplayName("Id Usuario")
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.FECHA)
+                                @Html.DisplayName("Fecha")
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.IVA)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.TOTAL)
+                                @Html.DisplayName("Total")
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.NUMPAGO)
+                                @Html.DisplayName("Numero de pago")
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.DESCUENTO)
+                                @Html.DisplayName("Descuento")
                             </th>
                             <th></th>
                         </tr>
@@ -65,9 +65,9 @@
                                     @Html.DisplayFor(modelItem => item.DESCUENTO)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.IDFACTURA }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.IDFACTURA }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.IDFACTURA })
+                                    @Html.ActionLink("Editar", "Edit", new { id = item.IDFACTURA }) |
+                                    @Html.ActionLink("Detalles", "Details", new { id = item.IDFACTURA }) |
+                                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IDFACTURA })
                                 </td>
                             </tr>
                         }
