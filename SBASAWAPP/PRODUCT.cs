@@ -11,7 +11,8 @@ namespace SBASAWAPP
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class PRODUCT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,10 +22,19 @@ namespace SBASAWAPP
             this.PRODUCTSPS = new HashSet<PRODUCTSP>();
             this.QUOTECARTs = new HashSet<QUOTECART>();
         }
-    
+
         public int ID { get; set; }
+
+        [Required]
+        [Display(Name = "Nombre")]
         public string NAME { get; set; }
+
+        [Required]
+        [Display(Name = "Descripcion")]
         public string DESCRIPTION { get; set; }
+
+        [Required]
+        [Display(Name = "Precio")]
         public decimal PRICE { get; set; }
         public string URL { get; set; }
         public Nullable<int> CATEGORY { get; set; }

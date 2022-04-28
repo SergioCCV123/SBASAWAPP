@@ -11,10 +11,14 @@ namespace SBASAWAPP
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class CATEGORIA
     {
         public int IdCategoria { get; set; }
+
+        [Required]
+        [Display(Name = "Descripcion")]
         public string Descripcion { get; set; }
         public Nullable<bool> Activo { get; set; }
         public Nullable<System.DateTime> FechaRegistro { get; set; }
