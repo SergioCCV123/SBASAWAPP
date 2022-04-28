@@ -6,7 +6,7 @@
 }
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear nuevo", "Create")
 </p>
 <section id="main">
     <div class="inner">
@@ -24,10 +24,10 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.CLIENT_NAME)
+                                @Html.DisplayName("Nombre de cliente")
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.SALE_TOTAL)
+                                @Html.DisplayName("Total")
                             </th>
                             <th></th>
                         </tr>
@@ -43,9 +43,9 @@
                                     @Html.DisplayFor(modelItem => item.SALE_TOTAL)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                                    @Html.ActionLink("Editar", "Edit", new { id = item.ID }) |
+                                    @Html.ActionLink("Detalles", "Details", new { id = item.ID }) |
+                                    @Html.ActionLink("Eliminar", "Delete", new { id = item.ID })
                                 </td>
                             </tr>
                         }

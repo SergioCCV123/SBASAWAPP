@@ -8,15 +8,15 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear nuevo", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.MESSAGE)
+            @Html.DisplayName("Mensaje")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FECHA)
+            @Html.DisplayName("Fecha")
         </th>
         <th></th>
     </tr>
@@ -30,7 +30,7 @@
             @Html.DisplayFor(modelItem => item.FECHA)
         </td>
         <td>
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID , @class="fas fas-x"})
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.ID , @class="fas fas-x"})
         </td>
     </tr>
 }
