@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<SBASAWAPP.NOTIFICATION>
-
+@using Microsoft.AspNet.Identity;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -21,18 +21,23 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MESSAGE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FECHA)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID , @class="fas fas-x"})
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        if (item.IDUSER.Equals(User.Identity.GetUserId()))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MESSAGE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FECHA)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID, @class = "fas fas-x" })
+                </td>
+            </tr>
+        }
+
+    }
 
 </table>
