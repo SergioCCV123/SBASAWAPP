@@ -7,10 +7,10 @@
 
 <h2>Crear</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Notificación</h4>
         <hr />
@@ -60,3 +60,7 @@
 <div>
     @Html.ActionLink("Volver a la lista", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

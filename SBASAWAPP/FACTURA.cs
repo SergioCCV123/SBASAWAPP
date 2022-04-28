@@ -11,14 +11,27 @@ namespace SBASAWAPP
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class FACTURA
     {
         public int IDFACTURA { get; set; }
+
+        [Required]
+        [Display(Name = "Id Usuario")]
         public string IDUSUARIO { get; set; }
         public System.DateTime FECHA { get; set; }
+
+        [Required]
+        [Display(Name = "IVA")]
         public float IVA { get; set; }
+
+        [Required]
+        [Display(Name = "Total")]
         public float TOTAL { get; set; }
+
+        [Required]
+        [Display(Name = "Numero Pago")]
         public int NUMPAGO { get; set; }
         public Nullable<decimal> DESCUENTO { get; set; }
     }

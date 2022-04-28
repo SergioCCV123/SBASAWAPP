@@ -11,10 +11,15 @@ namespace SBASAWAPP
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class INSTALADOR
     {
+
         public int IdRol { get; set; }
+
+        [Required]
+        [Display(Name = "Nombre")]
         public string Nombre { get; set; }
         public Nullable<System.DateTime> FechaRegistro { get; set; }
         public string PROVINCIA { get; set; }
