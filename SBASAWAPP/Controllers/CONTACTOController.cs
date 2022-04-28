@@ -17,7 +17,7 @@ namespace SBASAWAPP.Controllers
         // GET: CONTACTO
         public ActionResult Index()
         {
-            return View(db.CONTACTO.ToList());
+            return View(db.CONTACTOes.ToList());
         }
 
         // GET: CONTACTO/Details/5
@@ -27,7 +27,7 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CONTACTO cONTACTO = db.CONTACTO.Find(id);
+            CONTACTO cONTACTO = db.CONTACTOes.Find(id);
             if (cONTACTO == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace SBASAWAPP.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.CONTACTO.Add(cONTACTO);
+                db.CONTACTOes.Add(cONTACTO);
                 db.SaveChanges();
                 return RedirectToAction("../");
             }
@@ -65,7 +65,7 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CONTACTO cONTACTO = db.CONTACTO.Find(id);
+            CONTACTO cONTACTO = db.CONTACTOes.Find(id);
             if (cONTACTO == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CONTACTO cONTACTO = db.CONTACTO.Find(id);
+            CONTACTO cONTACTO = db.CONTACTOes.Find(id);
             if (cONTACTO == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace SBASAWAPP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CONTACTO cONTACTO = db.CONTACTO.Find(id);
-            db.CONTACTO.Remove(cONTACTO);
+            CONTACTO cONTACTO = db.CONTACTOes.Find(id);
+            db.CONTACTOes.Remove(cONTACTO);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

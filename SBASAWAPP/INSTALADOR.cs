@@ -18,5 +18,7 @@ namespace SBASAWAPP
         public string Nombre { get; set; }
         public Nullable<System.DateTime> FechaRegistro { get; set; }
         public string PROVINCIA { get; set; }
+    
+        public virtual PROVINCIA PROVINCIA1 { get; set; }
     }
 }

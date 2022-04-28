@@ -1,0 +1,18 @@
+﻿@model IEnumerable<SBASAWAPP.NOTIFICATION>
+@using Microsoft.AspNet.Identity;
+<div class="modal fade" id="NotificacionWindow" tabindex="-1" aria-labelledby="NotificacionWindowLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                @foreach (var item in Model)
+                {
+                    if (item.IDUSER.Equals(User.Identity.GetUserId()))
+                    {
+                        <p>@item.MESSAGE</p>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

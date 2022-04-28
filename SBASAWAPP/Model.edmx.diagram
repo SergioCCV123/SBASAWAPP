@@ -4,33 +4,36 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cd1ba7984ba34ab2bff721c72bb986d1" Name="Diagram1" ZoomLevel="96" >
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="1.625" />
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="6.5" />
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="13.25" />
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.AspNetUserLogins" Width="1.5" PointX="5.25" PointY="8" />
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.AspNetUsers" Width="1.5" PointX="3" PointY="5.125" />
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.CATEGORIES" Width="1.5" PointX="0.75" PointY="3.625" />
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.FACTURA" Width="1.5" PointX="7.75" PointY="9.625" />
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.HISTORY" Width="1.5" PointX="5.25" PointY="4.25" />
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.INSTALADOR" Width="1.5" PointX="9.75" PointY="1.625" />
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.PRODUCTS" Width="1.5" PointX="3" PointY="0.75" />
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.SALES" Width="1.5" PointX="3" PointY="16.875" />
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.PRODUCTSPS" Width="1.5" PointX="5.25" PointY="1.375" />
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.SHOPP_CART" Width="1.5" PointX="8.25" PointY="6.375" />
-        <AssociationConnector Association="example5_SBASAWAPPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="example5_SBASAWAPPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
-        <AssociationConnector Association="example5_SBASAWAPPModel.FK__SHOPP_CAR__ID_US__6D0D32F4" />
-        <AssociationConnector Association="example5_SBASAWAPPModel.FK_HISTORY_USER" />
-        <AssociationConnector Association="example5_SBASAWAPPModel.FK__PRODUCTS__CATEGO__4AB81AF0" />
-        <AssociationConnector Association="example5_SBASAWAPPModel.FK_HISTORY_PRODUCTS" />
-        <AssociationConnector Association="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_PR__5BE2A6F2" />
-        <AssociationConnector Association="example5_SBASAWAPPModel.FK__SHOPP_CAR__ID_PR__6E01572D" />
-        <AssociationConnector Association="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_SA__5AEE82B9" />
-        <AssociationConnector Association="example5_SBASAWAPPModel.FK__FACTURA__IDUSUAR__5EBF139D" />
-        </Diagram>
-        <AssociationConnector Association="example5_SBASAWAPPModel.AspNetUserRoles" />
-        <EntityTypeShape EntityType="example5_SBASAWAPPModel.CONTACTO" Width="1.5" PointX="1" PointY="10.75" />
+      <Diagram DiagramId="b7ab275d77924a1e93107e3a2ec4e7a2" Name="Diagram1">
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.AspNetRole" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.AspNetUser" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.CATEGORIA" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.CATEGORy" Width="1.5" PointX="3.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.CONTACTO" Width="1.5" PointX="2.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.FACTURA" Width="1.5" PointX="10.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.HISTORY" Width="1.5" PointX="8.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.INSTALADOR" Width="1.5" PointX="11" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.PRODUCT" Width="1.5" PointX="6" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.PROVINCIA" Width="1.5" PointX="8.75" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.SALE" Width="1.5" PointX="6" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.PRODUCTSP" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="example5_SBASAWAPPModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="example5_SBASAWAPPModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="example5_SBASAWAPPModel.FK_HISTORY_USER" ManuallyRouted="false" />
+        <AssociationConnector Association="example5_SBASAWAPPModel.FK__PRODUCTS__CATEGO__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="example5_SBASAWAPPModel.FK_HISTORY_PRODUCTS" ManuallyRouted="false" />
+        <AssociationConnector Association="example5_SBASAWAPPModel.FK__INSTALADO__PROVI__17F790F9" ManuallyRouted="false" />
+        <AssociationConnector Association="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_PR__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="example5_SBASAWAPPModel.FK__PRODUCTSP__ID_SA__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="example5_SBASAWAPPModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.QUOTECART" Width="1.5" PointX="11.25" PointY="5.25" />
+        <AssociationConnector Association="example5_SBASAWAPPModel.FK__QUOTECART__ID_US__13F1F5EB" />
+        <AssociationConnector Association="example5_SBASAWAPPModel.FK__QUOTECART__ID_PR__14E61A24" />
+        <EntityTypeShape EntityType="example5_SBASAWAPPModel.NOTIFICATION" Width="1.5" PointX="5.25" PointY="14.75" />
+        <AssociationConnector Association="example5_SBASAWAPPModel.FK__NOTIFICAT__IDUSE__2057CCD0" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

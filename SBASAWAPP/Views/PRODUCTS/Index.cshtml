@@ -1,9 +1,9 @@
-﻿@model IEnumerable<SBASAWAPP.PRODUCTS>
+﻿@using SBASAWAPP.Models
+@model IEnumerable<SBASAWAPP.PRODUCT>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
 }
 
 @if (User.IsInRole("ADMIN"))
@@ -12,91 +12,28 @@
         @Html.ActionLink("Crear nuevo", "Create")
     </p>
 }
-
-@*<div>
-    <p>@Html.ActionLink("Historial de compras", "Index", "HISTORY")</p>
-</div>*@
-
-<table class="table">
-
-    @{
-        <p>Categoria: @Html.DropDownList("ListadoCategorias", items, "Seleccione una categoria", new { @class = "form-control" })</p>
-        <p><input type="submit" value="Elegir" /></p>
-    }
-
-
-
+@Html.Partial("_CATEGORIE", new ProductViewModel())
+<div class="row row row-cols-1 row-cols-md-3 card-columns justify-content-between" style="padding-top:2em;">
     @foreach (var item in Model)
     {
-
-        //if (item.CATEGORIES.CATEGORY_NAME == )
-        //{
-
-        if (item.ACTIVE == true)
+        if(item.ACTIVE==true)
         {
-            if (User.IsInRole("ADMIN"))
-            {
-                Layout = "~/Views/Shared/_AdminLayout.cshtml";
-
-                <div class="menu">
-                    <div class="products">
-                        <div class="row center-xs">
-                            <div class="col-xs-10 col-sm-6 col-md-4">
-                                <div class="card">
-                                    <img src="@item.URL">
-                                    <h3>@item.NAME</h3>
-                                    <p>Colones: @item.PRICE</p>
-
-                                    <a href="@Url.Action("Create", "HISTORY", new { id = item.ID })" class="btn btn-primary">Comprar</a>
-
-
-                                    <p>
-                                        @Html.ActionLink("Editar", "Edit", new { id = item.ID }) |
-                                        @Html.ActionLink("Elimnar", "Delete", new { id = item.ID }) |
-                                        @Html.ActionLink("Detalles", "Details", new { id = item.ID })
-                                    </p>
-
-                                </div>
-                            </div>
+            <div class="col p-2">
+                <div class="card text-center m-auto">
+                    <img src="@item.URL" class="card-img-top p-2" alt="Alternate Text" />
+                    <div class="card-body">
+                        <div class="card-title text-center" style="color:#094067; font-family: 'Open Sans', sans-serif;">
+                            <p>@item.NAME</p>
                         </div>
+                        <p>@item.DESCRIPTION</p>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a href="@Url.Action("Create", "QUOTECART", new { id = item.ID })" class="btn btn-primary">Añadir al carrito</a>
+                        }
                     </div>
                 </div>
-            }
-            else {
-                <div class="menu">
-                    <div class="products">
-                        <div class="row center-xs">
-                            <div class="col-xs-10 col-sm-6 col-md-4">
-                                <div class="card">
-                                    <img src="@item.URL">
-                                    <h3>@item.NAME</h3>
-                                    <p>Colones: @item.PRICE</p>
-
-                                    <a href="@Url.Action("Create", "HISTORY", new { id = item.ID })" class="btn btn-primary">Comprar</a>
-
-                                    @if (User.IsInRole("ADMIN"))
-                                    {
-                                        <p>
-                                            @Html.ActionLink("Editar", "Edit", new { id = item.ID }) |
-                                            @Html.ActionLink("Eliminar", "Delete", new { id = item.ID }) |
-                                        </p>
-
-                                    }
-                                    <p>
-                                        @Html.ActionLink("Detalles", "Details", new { id = item.ID })
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
-
-
-
+            </div>
         }
-        //}
+
     }
-
-</table>
-
+</div>

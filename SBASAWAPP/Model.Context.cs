@@ -28,23 +28,284 @@ namespace SBASAWAPP
         }
     
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<CATEGORIES> CATEGORIES { get; set; }
-        public virtual DbSet<FACTURA> FACTURA { get; set; }
-        public virtual DbSet<HISTORY> HISTORY { get; set; }
-        public virtual DbSet<INSTALADOR> INSTALADOR { get; set; }
-        public virtual DbSet<PRODUCTS> PRODUCTS { get; set; }
-        public virtual DbSet<SALES> SALES { get; set; }
-        public virtual DbSet<PRODUCTSPS> PRODUCTSPS { get; set; }
-        public virtual DbSet<SHOPP_CART> SHOPP_CART { get; set; }
-        public virtual DbSet<CONTACTO> CONTACTO { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<CATEGORIA> CATEGORIAs { get; set; }
+        public virtual DbSet<CATEGORy> CATEGORIES { get; set; }
+        public virtual DbSet<CONTACTO> CONTACTOes { get; set; }
+        public virtual DbSet<FACTURA> FACTURAs { get; set; }
+        public virtual DbSet<HISTORY> HISTORies { get; set; }
+        public virtual DbSet<INSTALADOR> INSTALADORs { get; set; }
+        public virtual DbSet<PRODUCT> PRODUCTS { get; set; }
+        public virtual DbSet<PROVINCIA> PROVINCIAs { get; set; }
+        public virtual DbSet<SALE> SALES { get; set; }
+        public virtual DbSet<PRODUCTSP> PRODUCTSPS { get; set; }
+        public virtual DbSet<QUOTECART> QUOTECARTs { get; set; }
+        public virtual DbSet<NOTIFICATION> NOTIFICATIONS { get; set; }
+    
+        public virtual int sp_actualizarRutaImagen(Nullable<int> idProducto, string rutaImagen)
+        {
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("IdProducto", idProducto) :
+                new ObjectParameter("IdProducto", typeof(int));
+    
+            var rutaImagenParameter = rutaImagen != null ?
+                new ObjectParameter("RutaImagen", rutaImagen) :
+                new ObjectParameter("RutaImagen", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_actualizarRutaImagen", idProductoParameter, rutaImagenParameter);
+        }
+    
+        public virtual int sp_editarProducto(Nullable<int> idProducto, string nombre, string descripcion, Nullable<int> idMarca, Nullable<int> idCategoria, Nullable<int> stock, Nullable<bool> activo, ObjectParameter resultado)
+        {
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("IdProducto", idProducto) :
+                new ObjectParameter("IdProducto", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var idMarcaParameter = idMarca.HasValue ?
+                new ObjectParameter("IdMarca", idMarca) :
+                new ObjectParameter("IdMarca", typeof(int));
+    
+            var idCategoriaParameter = idCategoria.HasValue ?
+                new ObjectParameter("IdCategoria", idCategoria) :
+                new ObjectParameter("IdCategoria", typeof(int));
+    
+            var stockParameter = stock.HasValue ?
+                new ObjectParameter("Stock", stock) :
+                new ObjectParameter("Stock", typeof(int));
+    
+            var activoParameter = activo.HasValue ?
+                new ObjectParameter("Activo", activo) :
+                new ObjectParameter("Activo", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_editarProducto", idProductoParameter, nombreParameter, descripcionParameter, idMarcaParameter, idCategoriaParameter, stockParameter, activoParameter, resultado);
+        }
+    
+        public virtual int sp_InsertarCarrito(Nullable<int> idUsuario, Nullable<int> idProducto, ObjectParameter resultado)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("IdProducto", idProducto) :
+                new ObjectParameter("IdProducto", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_InsertarCarrito", idUsuarioParameter, idProductoParameter, resultado);
+        }
+    
+        public virtual int sp_ModificarCategoria(Nullable<int> idCategoria, string descripcion, Nullable<bool> activo, ObjectParameter resultado)
+        {
+            var idCategoriaParameter = idCategoria.HasValue ?
+                new ObjectParameter("IdCategoria", idCategoria) :
+                new ObjectParameter("IdCategoria", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var activoParameter = activo.HasValue ?
+                new ObjectParameter("Activo", activo) :
+                new ObjectParameter("Activo", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ModificarCategoria", idCategoriaParameter, descripcionParameter, activoParameter, resultado);
+        }
+    
+        public virtual int sp_ModificarMarca(Nullable<int> idMarca, string descripcion, Nullable<bool> activo, ObjectParameter resultado)
+        {
+            var idMarcaParameter = idMarca.HasValue ?
+                new ObjectParameter("IdMarca", idMarca) :
+                new ObjectParameter("IdMarca", typeof(int));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var activoParameter = activo.HasValue ?
+                new ObjectParameter("Activo", activo) :
+                new ObjectParameter("Activo", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ModificarMarca", idMarcaParameter, descripcionParameter, activoParameter, resultado);
+        }
+    
+        public virtual int sp_ObtenerCarrito(Nullable<int> idUsuario)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ObtenerCarrito", idUsuarioParameter);
+        }
+    
+        public virtual ObjectResult<sp_obtenerCategoria_Result> sp_obtenerCategoria()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_obtenerCategoria_Result>("sp_obtenerCategoria");
+        }
+    
+        public virtual int sp_ObtenerCompra(Nullable<int> idUsuario)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ObtenerCompra", idUsuarioParameter);
+        }
+    
+        public virtual int sp_obtenerMarca()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_obtenerMarca");
+        }
+    
+        public virtual int sp_obtenerProducto()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_obtenerProducto");
+        }
+    
+        public virtual int sp_RegistrarCategoria(string descripcion, ObjectParameter resultado)
+        {
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_RegistrarCategoria", descripcionParameter, resultado);
+        }
+    
+        public virtual int sp_registrarCompra(Nullable<int> idUsuario, Nullable<int> totalProducto, Nullable<decimal> total, string contacto, string telefono, string direccion, string idDistrito, string queryDetalleCompra, ObjectParameter resultado)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            var totalProductoParameter = totalProducto.HasValue ?
+                new ObjectParameter("TotalProducto", totalProducto) :
+                new ObjectParameter("TotalProducto", typeof(int));
+    
+            var totalParameter = total.HasValue ?
+                new ObjectParameter("Total", total) :
+                new ObjectParameter("Total", typeof(decimal));
+    
+            var contactoParameter = contacto != null ?
+                new ObjectParameter("Contacto", contacto) :
+                new ObjectParameter("Contacto", typeof(string));
+    
+            var telefonoParameter = telefono != null ?
+                new ObjectParameter("Telefono", telefono) :
+                new ObjectParameter("Telefono", typeof(string));
+    
+            var direccionParameter = direccion != null ?
+                new ObjectParameter("Direccion", direccion) :
+                new ObjectParameter("Direccion", typeof(string));
+    
+            var idDistritoParameter = idDistrito != null ?
+                new ObjectParameter("IdDistrito", idDistrito) :
+                new ObjectParameter("IdDistrito", typeof(string));
+    
+            var queryDetalleCompraParameter = queryDetalleCompra != null ?
+                new ObjectParameter("QueryDetalleCompra", queryDetalleCompra) :
+                new ObjectParameter("QueryDetalleCompra", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_registrarCompra", idUsuarioParameter, totalProductoParameter, totalParameter, contactoParameter, telefonoParameter, direccionParameter, idDistritoParameter, queryDetalleCompraParameter, resultado);
+        }
+    
+        public virtual int sp_RegistrarMarca(string descripcion, ObjectParameter resultado)
+        {
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_RegistrarMarca", descripcionParameter, resultado);
+        }
+    
+        public virtual int sp_registrarProducto(string nombre, string descripcion, Nullable<int> idMarca, Nullable<int> idCategoria, Nullable<int> stock, string rutaImagen, ObjectParameter resultado)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var idMarcaParameter = idMarca.HasValue ?
+                new ObjectParameter("IdMarca", idMarca) :
+                new ObjectParameter("IdMarca", typeof(int));
+    
+            var idCategoriaParameter = idCategoria.HasValue ?
+                new ObjectParameter("IdCategoria", idCategoria) :
+                new ObjectParameter("IdCategoria", typeof(int));
+    
+            var stockParameter = stock.HasValue ?
+                new ObjectParameter("Stock", stock) :
+                new ObjectParameter("Stock", typeof(int));
+    
+            var rutaImagenParameter = rutaImagen != null ?
+                new ObjectParameter("RutaImagen", rutaImagen) :
+                new ObjectParameter("RutaImagen", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_registrarProducto", nombreParameter, descripcionParameter, idMarcaParameter, idCategoriaParameter, stockParameter, rutaImagenParameter, resultado);
+        }
+    
+        public virtual int sp_registrarUsuario(string nombres, string apellidos, string correo, string contrasena, Nullable<bool> esAdministrador, ObjectParameter resultado)
+        {
+            var nombresParameter = nombres != null ?
+                new ObjectParameter("Nombres", nombres) :
+                new ObjectParameter("Nombres", typeof(string));
+    
+            var apellidosParameter = apellidos != null ?
+                new ObjectParameter("Apellidos", apellidos) :
+                new ObjectParameter("Apellidos", typeof(string));
+    
+            var correoParameter = correo != null ?
+                new ObjectParameter("Correo", correo) :
+                new ObjectParameter("Correo", typeof(string));
+    
+            var contrasenaParameter = contrasena != null ?
+                new ObjectParameter("Contrasena", contrasena) :
+                new ObjectParameter("Contrasena", typeof(string));
+    
+            var esAdministradorParameter = esAdministrador.HasValue ?
+                new ObjectParameter("EsAdministrador", esAdministrador) :
+                new ObjectParameter("EsAdministrador", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_registrarUsuario", nombresParameter, apellidosParameter, correoParameter, contrasenaParameter, esAdministradorParameter, resultado);
+        }
     
         public virtual ObjectResult<STATS_Result> STATS()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<STATS_Result>("STATS");
+        }
+    
+        public virtual ObjectResult<SUMAPROVINCIA_Result> SUMAPROVINCIA()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SUMAPROVINCIA_Result>("SUMAPROVINCIA");
+        }
+    
+        public virtual int sp_obtenerUsuario(string correo, string contrasena)
+        {
+            var correoParameter = correo != null ?
+                new ObjectParameter("Correo", correo) :
+                new ObjectParameter("Correo", typeof(string));
+    
+            var contrasenaParameter = contrasena != null ?
+                new ObjectParameter("Contrasena", contrasena) :
+                new ObjectParameter("Contrasena", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_obtenerUsuario", correoParameter, contrasenaParameter);
+        }
+    
+        public virtual ObjectResult<SUMAPROVINCIA1_Result> SUMAPROVINCIA1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SUMAPROVINCIA1_Result>("SUMAPROVINCIA1");
         }
     }
 }

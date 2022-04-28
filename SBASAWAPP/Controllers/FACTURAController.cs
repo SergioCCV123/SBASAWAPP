@@ -15,7 +15,7 @@ namespace SBASAWAPP.Controllers
         // GET: FACTURA
         public ActionResult Index()
         {
-            return View(db.FACTURA.ToList());
+            return View(db.FACTURAs.ToList());
         }
 
         // GET: FACTURA/Details/5
@@ -25,7 +25,7 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FACTURA fACTURA = db.FACTURA.Find(id);
+            FACTURA fACTURA = db.FACTURAs.Find(id);
             if (fACTURA == null)
             {
                 return HttpNotFound();
@@ -48,7 +48,7 @@ namespace SBASAWAPP.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.FACTURA.Add(fACTURA);
+                db.FACTURAs.Add(fACTURA);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -63,7 +63,7 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FACTURA fACTURA = db.FACTURA.Find(id);
+            FACTURA fACTURA = db.FACTURAs.Find(id);
             if (fACTURA == null)
             {
                 return HttpNotFound();
@@ -95,7 +95,7 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            FACTURA fACTURA = db.FACTURA.Find(id);
+            FACTURA fACTURA = db.FACTURAs.Find(id);
             if (fACTURA == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace SBASAWAPP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(decimal id)
         {
-            FACTURA fACTURA = db.FACTURA.Find(id);
-            db.FACTURA.Remove(fACTURA);
+            FACTURA fACTURA = db.FACTURAs.Find(id);
+            db.FACTURAs.Remove(fACTURA);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

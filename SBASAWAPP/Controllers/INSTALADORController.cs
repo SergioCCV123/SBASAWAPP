@@ -17,7 +17,7 @@ namespace SBASAWAPP.Controllers
         // GET: INSTALADOR
         public ActionResult Index()
         {
-            return View(db.INSTALADOR.ToList());
+            return View(db.INSTALADORs.ToList());
         }
 
         // GET: INSTALADOR/Details/5
@@ -27,7 +27,7 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            INSTALADOR iNSTALADOR = db.INSTALADOR.Find(id);
+            INSTALADOR iNSTALADOR = db.INSTALADORs.Find(id);
             if (iNSTALADOR == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace SBASAWAPP.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.INSTALADOR.Add(iNSTALADOR);
+                db.INSTALADORs.Add(iNSTALADOR);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            INSTALADOR iNSTALADOR = db.INSTALADOR.Find(id);
+            INSTALADOR iNSTALADOR = db.INSTALADORs.Find(id);
             if (iNSTALADOR == null)
             {
                 return HttpNotFound();
@@ -96,7 +96,7 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            INSTALADOR iNSTALADOR = db.INSTALADOR.Find(id);
+            INSTALADOR iNSTALADOR = db.INSTALADORs.Find(id);
             if (iNSTALADOR == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace SBASAWAPP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            INSTALADOR iNSTALADOR = db.INSTALADOR.Find(id);
-            db.INSTALADOR.Remove(iNSTALADOR);
+            INSTALADOR iNSTALADOR = db.INSTALADORs.Find(id);
+            db.INSTALADORs.Remove(iNSTALADOR);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

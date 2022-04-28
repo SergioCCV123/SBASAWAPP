@@ -31,7 +31,7 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SALES sALES = db.SALES.Find(id);
+            SALE sALES = db.SALES.Find(id);
             if (sALES == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace SBASAWAPP.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,CLIENT_NAME,SALE_TOTAL")] SALES sALES)
+        public ActionResult Create([Bind(Include = "ID,CLIENT_NAME,SALE_TOTAL")] SALE sALES)
         {
             if (ModelState.IsValid)
             {
@@ -69,7 +69,7 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SALES sALES = db.SALES.Find(id);
+            SALE sALES = db.SALES.Find(id);
             if (sALES == null)
             {
                 return HttpNotFound();
@@ -82,7 +82,7 @@ namespace SBASAWAPP.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,CLIENT_NAME,SALE_TOTAL")] SALES sALES)
+        public ActionResult Edit([Bind(Include = "ID,CLIENT_NAME,SALE_TOTAL")] SALE sALES)
         {
             if (ModelState.IsValid)
             {
@@ -100,7 +100,7 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SALES sALES = db.SALES.Find(id);
+            SALE sALES = db.SALES.Find(id);
             if (sALES == null)
             {
                 return HttpNotFound();
@@ -113,7 +113,7 @@ namespace SBASAWAPP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SALES sALES = db.SALES.Find(id);
+            SALE sALES = db.SALES.Find(id);
             db.SALES.Remove(sALES);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -130,7 +130,7 @@ namespace SBASAWAPP.Controllers
 
         public ActionResult Excel()
         {
-            var list = new List<SALES>();
+            var list = new List<SALE>();
             list = db.SALES.ToList();
             var stream = new MemoryStream();
 

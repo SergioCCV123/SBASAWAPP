@@ -1,0 +1,10 @@
+﻿@using SBASAWAPP.Models
+@model ProductViewModel
+@using (Html.BeginForm("Categorias", "PRODUCTS", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="row">
+        <p class="form-label col-6">Por favor seleccione la categoria<p>
+        @Html.DropDownListFor(m => m.categorie, (IEnumerable<SelectListItem>)ViewBag.items, new { @class = "form-control" })
+    </div>
+    <input type="submit" value="Aceptar" class="btn btn-primary" />
+}

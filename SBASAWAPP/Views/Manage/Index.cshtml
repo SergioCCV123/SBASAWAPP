@@ -52,30 +52,32 @@
 
                             <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
-                                <form>
-                                    <dt>Nombre de Usuario:</dt>
-                                    <dd>
-                                        @User.Identity.Name
-                                        @Html.ActionLink("[Cambiar Nombre de Usuario]", "ChangeUsername", "Manage")
-                                    </dd>
+                                    <dl>
+                                        <dt>Nombre de Usuario:</dt>
+                                        <dd>
+                                            @User.Identity.Name
+                                            @Html.ActionLink("[Cambiar Nombre de Usuario]", "ChangeUsername", "Manage")
+                                        </dd>
 
-                                    <dt>Teléfono:</dt>
-                                    <dd>
-                                        @(Model.PhoneNumber ?? "Ninguno") [
-                                        @if (Model.PhoneNumber != null)
-                                        {
-                                            @Html.ActionLink("Cambiar", "AddPhoneNumber")
-                                            @: &nbsp;|&nbsp;
-                                            @Html.ActionLink("Eliminar", "RemovePhoneNumber")
-                                        }
-                                        else
-                                        {
-                                            @Html.ActionLink("Añadir", "AddPhoneNumber")
-                                        }
-                                        ]
-                                    </dd>
-
-                                </form>
+                                        <dt>Teléfono:</dt>
+                                        <dd>
+                                            @(Model.PhoneNumber ?? "None")
+                                            @if (Model.PhoneNumber != null)
+                                            {
+                                                <br />
+                                                <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+                                                using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                                {
+                                                    @Html.AntiForgeryToken()
+                                                    <text>[<input type="submit" value="Remove" />]</text>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+                                            }
+                                        </dd>
+                                    </dl>
 
                                 @*<form>
                                         <div class="row mb-3">

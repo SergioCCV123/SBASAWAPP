@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SBASAWAPP;
+using SBASAWAPP.Models;
 
 namespace SBASAWAPP.Controllers
 {
@@ -39,7 +40,7 @@ namespace SBASAWAPP.Controllers
 
             ViewBag.items = items;
 
-            var pRODUCTS = db.PRODUCTS.Include(p => p.CATEGORIES);
+            var pRODUCTS = db.PRODUCTS.Include(p => p.CATEGORy1);
             return View(pRODUCTS.ToList());
         }
 
@@ -50,7 +51,7 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRODUCTS pRODUCT = db.PRODUCTS.Find(id);
+            PRODUCT pRODUCT = db.PRODUCTS.Find(id);
             if (pRODUCT == null)
             {
                 return HttpNotFound();
@@ -70,7 +71,7 @@ namespace SBASAWAPP.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,NAME,DESCRIPTION,PRICE,URL,CATEGORY")] PRODUCTS pRODUCT)
+        public ActionResult Create([Bind(Include = "ID,NAME,DESCRIPTION,PRICE,URL,CATEGORY")] PRODUCT pRODUCT)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +91,7 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRODUCTS pRODUCT = db.PRODUCTS.Find(id);
+            PRODUCT pRODUCT = db.PRODUCTS.Find(id);
             if (pRODUCT == null)
             {
                 return HttpNotFound();
@@ -104,7 +105,7 @@ namespace SBASAWAPP.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,NAME,DESCRIPTION,PRICE,URL,CATEGORY")] PRODUCTS pRODUCT)
+        public ActionResult Edit([Bind(Include = "ID,NAME,DESCRIPTION,PRICE,URL,CATEGORY")] PRODUCT pRODUCT)
         {
             if (ModelState.IsValid)
             {
@@ -123,7 +124,7 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PRODUCTS pRODUCT = db.PRODUCTS.Find(id);
+            PRODUCT pRODUCT = db.PRODUCTS.Find(id);
             if (pRODUCT == null)
             {
                 return HttpNotFound();
@@ -136,7 +137,7 @@ namespace SBASAWAPP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PRODUCTS pRODUCT = db.PRODUCTS.Find(id);
+            PRODUCT pRODUCT = db.PRODUCTS.Find(id);
             db.PRODUCTS.Remove(pRODUCT);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -149,6 +150,37 @@ namespace SBASAWAPP.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+
+        public ActionResult Categorias(ProductViewModel categoria)
+        {
+            List<Models.CategoriesViewModels> lst = null;
+
+            lst = (from d in db.CATEGORIES
+                   select new Models.CategoriesViewModels
+                   {
+                       ID = d.ID,
+                       CATEGORY_NAME = d.CATEGORY_NAME
+                   }).ToList();
+
+            List<SelectListItem> items = lst.ConvertAll(d =>
+            {
+                return new SelectListItem()
+                {
+                    Text = d.CATEGORY_NAME.ToString(),
+                    Value = d.ID.ToString(),
+                    Selected = false
+                };
+            });
+
+            ViewBag.items = items;
+
+            int idCategoria = Int32.Parse(categoria.categorie.ToString());
+            var query = from a in db.PRODUCTS
+                        where a.CATEGORY == idCategoria
+                        select a;
+            return View("../PRODUCTS/Index", query.ToList()); 
         }
 
 

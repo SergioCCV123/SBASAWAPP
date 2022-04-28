@@ -10,6 +10,7 @@ using SBASAWAPP;
 
 namespace SBASAWAPP.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class AspNetUsersController : Controller
     {
         private example5_SBASAWAPPEntities db = new example5_SBASAWAPPEntities();
@@ -27,7 +28,7 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUsers aspNetUser = db.AspNetUsers.Find(id);
+            AspNetUser aspNetUser = db.AspNetUsers.Find(id);
             if (aspNetUser == null)
             {
                 return HttpNotFound();
@@ -44,7 +45,7 @@ namespace SBASAWAPP.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Activo")] AspNetUsers aspNetUsers)
+        public ActionResult Create([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Activo")] AspNetUser aspNetUsers)
         {
             if (ModelState.IsValid)
             {
@@ -62,7 +63,7 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
+            AspNetUser aspNetUsers = db.AspNetUsers.Find(id);
             if (aspNetUsers == null)
             {
                 return HttpNotFound();
@@ -75,7 +76,7 @@ namespace SBASAWAPP.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Activo")] AspNetUsers aspNetUsers)
+        public ActionResult Edit([Bind(Include = "Id,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Activo")] AspNetUser aspNetUsers)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +94,7 @@ namespace SBASAWAPP.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
+            AspNetUser aspNetUsers = db.AspNetUsers.Find(id);
             if (aspNetUsers == null)
             {
                 return HttpNotFound();
@@ -106,7 +107,7 @@ namespace SBASAWAPP.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            AspNetUsers aspNetUsers = db.AspNetUsers.Find(id);
+            AspNetUser aspNetUsers = db.AspNetUsers.Find(id);
             db.AspNetUsers.Remove(aspNetUsers);
             db.SaveChanges();
             return RedirectToAction("Index");
