@@ -1,0 +1,120 @@
+﻿@model IEnumerable<SBASAWAPP.PROVINCIA>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row" style="margin-top:20px">
+    @*<div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading"> <b>Reporte de Instalaciones</b> </div>
+
+            <div class="panel-body">
+                <canvas id="myBarChart" width="100" height="70"></canvas>
+            </div>
+
+        </div>
+    </div>*@
+
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading"> <b>Reporte de Producto mas vendido</b> </div>
+
+            <div class="panel-body">
+                <canvas id="myPieChart" width="100" height="300"></canvas>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+@section scripts{
+    <script>
+
+        //var controlBar = document.getElementById("myBarChart");
+
+        //var graficobar = new Chart(controlBar, {
+        //    type: 'bar',
+        //    data: {
+        //        labels: ["Limón", "Alajuela", "Heredia", "San Jose", "Guanacaste", "Cartago", "Puntarenas"],
+        //        datasets: [
+        //            {
+        //                label: "reporte",
+        //                backgroundColor: "#BB2100",
+        //                data: [5,8,3,6,1,7,9],
+        //            }
+
+        //        ]
+        //    },
+        //    options: {
+        //        scales: {
+        //            xAxes: [{
+        //                gridLines: {
+        //                    display:true
+        //                }
+        //            }],
+        //            yAxes: [{
+        //                gridLines: {
+        //                    display: true
+        //                }
+        //            }]
+        //        }
+        //    }
+        //})
+
+        //var controlPie = document.getElementById("myPieChart");
+
+        //var graficobar = new Chart(controlPie, {
+        //    type: 'pie',
+        //    data: {
+        //        labels: ["Bomba 1", "Bomba 2", "Bomba 3", "Bomba 4"],
+        //        datasets: [{
+        //                data: [5, 8, 3, 6],
+        //                backgroundColor: ["#007bff", "#dc3545", "#ffc107", "#28a745"],
+        //        }],
+        //    },
+        //});
+
+        jQuery.ajax({
+                url: '@Url.Action("ReporteProductos", "GRAFICOS")',
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    console.log(data);
+
+                    var arrayID = [];
+                    var arrayCANTIDAD = [];
+
+                    for (var i = 0; i < data.length; i++) {
+
+                        /*console.log(data[i].producto)*/
+                        arrayID.push(data[i].name)
+                        arrayCANTIDAD.push(data[i].cantidad)
+                    }
+
+
+                    var controlPie1 = document.getElementById("myPieChart");
+                    var graficoPie1 = new Chart(controlPie1, {
+                        type: 'pie',
+                        data: {
+                            labels: arrayID,
+                            datasets: [{
+                                data: arrayCANTIDAD,
+                                backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745', '#CB2ACF'],
+                            }],
+                        },
+                    });
+
+                },
+                error: function (error) {
+                    console.log(error)
+                }
+         });
+
+    </script>
+
+}
