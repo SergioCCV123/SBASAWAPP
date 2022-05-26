@@ -31,7 +31,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="~/Home/Index">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="~/Admin">
                 <div class="sidebar-brand-icon rotate-n-15">
                 </div>
                 <div class="sidebar-brand-text mx-3">Bombeo Arcor</div>
@@ -45,30 +45,67 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Estadisticas
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Cruds</span>
+                    <i class="fas fa-fw fa-bars"></i>
+                    <span>Estadisticas</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Cruds</h6>
-                        <a class="collapse-item" href="@Url.Action("Index", "PRODUCTADMIN")">Productos</a>
                         <a class="collapse-item" href="@Url.Action("Index", "SALES")">Ventas</a>
-                        <a class="collapse-item" href="@Url.Action("Index", "INSTALADOR")">Instalaciones</a>
                         <a class="collapse-item" href="@Url.Action("Index", "FACTURA")">Facturas</a>
-                        <a class="collapse-item" href="@Url.Action("Index", "AspNetUsers")">Usuarios</a>
-                        <a class="collapse-item" href="@Url.Action("Index", "CONTACTO")">Contacto</a>
                         <a class="collapse-item" href="@Url.Action("Index", "QUOTECARTADMIN")">Cotizaciones</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Administracion
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                   aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-book fa-fw"></i>
+                    <span>Inventario</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="@Url.Action("Index", "PRODUCTADMIN")">Productos</a>
                         <a class="collapse-item" href="@Url.Action("Index", "CATEGORies")">Categorias</a>
                     </div>
                 </div>
             </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                   aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Otros</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="@Url.Action("Index", "AspNetUsers")">Usuarios</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "CONTACTO")">Contacto</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "INSTALADOR")">Instalaciones</a>
+                    </div>
+                </div>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -106,7 +143,11 @@
                                  aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="@Url.Action("Index", "Manage")">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                                    Perfil
+                                </a>
+                                <a class="dropdown-item" href="@Url.Action("Index", "Home")">
+                                    <i class="fas fa-home fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Salir
                                 </a>
                             </div>
                         </li>

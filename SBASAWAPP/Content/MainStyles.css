@@ -37,10 +37,20 @@ html, body {
     color: #094067!important;
 }
 
-.card {
-    width: 18rem!important;
-    background-color: #3DA9FC!important;
-    border-radius: 21px !important
+.card-form {
+    width: 70% !important;
+    background-color: #3DA9FC !important;
+}
+.col {
+    display: flex;
+    justify-content: center;
+}
+
+.card-products {
+    width: 18rem !important;
+    background-color: #FFFFFF !important;
+    border-radius: 10px !important;
+    border: none !important;
 }
 
 .pageTitle {
